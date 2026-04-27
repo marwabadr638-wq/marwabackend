@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #1a202c;
+        }
+        .checkout-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 { margin-top: 0; font-size: 1.5rem; text-align: center; color: #2d3748; }
+        p.desc { text-align: center; color: #718096; margin-bottom: 2rem; font-size: 0.9rem; }
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.5rem; color: #4a5568; }
+        input {
+            width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 6px;
+            font-size: 1rem; box-sizing: border-box;
+        }
+        .flex-row { display: flex; gap: 1rem; }
+        .btn-pay {
+            width: 100%; padding: 1rem; background-color: #14b8a6; color: white;
+            border: none; border-radius: 6px; font-size: 1rem; font-weight: 600;
+            cursor: pointer; margin-top: 1.5rem; transition: background 0.3s;
+        }
+        .btn-pay:hover { background-color: #0d9488; }
+        .secure-badge { text-align: center; margin-top: 1.5rem; font-size: 0.8rem; color: #a0aec0; }
+    </style>
+</head>
+<body>
+
+    <div class="checkout-box">
+        <h2>Secure Payment</h2>
+        <p class="desc">Complete your subscription to access the course.</p>
+        
+        <form id="payment-form" onsubmit="event.preventDefault(); processPayment();">
+            <div class="form-group">
+                <label>Cardholder Name</label>
+                <input type="text" id="card-name" placeholder="Dr. Marwa Badr" required>
+            </div>
+            <div class="form-group">
+                <label>Card Number (Visa)</label>
+                <input type="text" placeholder="4242 4242 4242 4242" required value="4242 4242 4242 4242">
+            </div>
+            <div class="flex-row">
+                <div class="form-group" style="flex: 1;">
+                    <label>Expiry Date</label>
+                    <input type="text" placeholder="MM/YY" required value="12/28">
+                </div>
+                <div class="form-group" style="flex: 1;">
+                    <label>CVC</label>
+                    <input type="text" placeholder="123" required value="123">
+                </div>
+            </div>
+            <button type="submit" class="btn-pay" id="pay-btn">Pay Now - $49.00</button>
+        </form>
+        <div class="secure-badge">
+            <div style="font-weight: 600; color: #2d3748; margin-bottom: 0.5rem;">🔒 Secured by PayTabs</div>
+            <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 0.5rem; color: #4a5568; font-size: 0.85rem;">
+                <span style="display: flex; align-items: center; gap: 0.2rem;"><i class="ph ph-shield-check" style="color: #14b8a6; font-size: 1.1rem;"></i> Secure</span>
+                <span style="display: flex; align-items: center; gap: 0.2rem;"><i class="ph ph-lightning" style="color: #f59e0b; font-size: 1.1rem;"></i> Instant Access</span>
+                <span style="display: flex; align-items: center; gap: 0.2rem;"><i class="ph ph-certificate" style="color: #3b82f6; font-size: 1.1rem;"></i> Certificate</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/payment-service.js"></script>
+    <script>
+        // Supabase Initialization
+        const SUPABASE_URL = 'https://essanwtunejifzyuvgtu.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVzc2Fud3R1bmVqaWZ6eXV2Z3R1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxMjExMDcsImV4cCI6MjA5MjY5NzEwN30.FqbqcUYCVrkthgimt2TVQiU3zQ_2k8B5UhB838YmwxU';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Read the course parameter to know what they are buying
+        const urlParams = new URLSearchParams(window.location.search);
+        const courseId = urlParams.get('course') || 'content';
+        const price = urlParams.get('price') || '49';
+        
+        // Update button text
+        document.getElementById('pay-btn').textContent = `Pay Now - $${price}`;
+
+        // Verify Authentication
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            if (!session) {
+                alert("Please log in to proceed to checkout.");
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Auto-fill name
+            const displayName = session.user.user_metadata?.name || session.user.email.split('@')[0];
+            const nameInput = document.getElementById('card-name');
+            if(nameInput) nameInput.value = displayName;
+        });
+
+        async function processPayment() {
+            const btn = document.getElementById('pay-btn');
+            btn.textContent = 'Processing Secure Payment...';
+            btn.style.opacity = '0.7';
+
+            // Use the AnalyticsSystem if available
+            if (window.AnalyticsSystem) {
+                window.AnalyticsSystem.trackEvent('checkout_started', { course: courseId, value: price });
+            }
+            
+            // Integrate with PayTabs via abstraction
+            if (window.PaymentService) {
+                const paymentDetails = {
+                    name: document.getElementById('card-name').value,
+                    course: courseId,
+                    amount: price,
+                    currency: 'USD'
+                };
+                
+                try {
+                    await window.PaymentService.processPayment(paymentDetails);
+                    
+                    if (window.AnalyticsSystem) {
+                        window.AnalyticsSystem.trackEvent('purchase_completed', { course: courseId, value: price });
+                    }
+
+                    btn.textContent = 'Payment Successful! Redirecting...';
+                    btn.style.backgroundColor = '#10b981'; // Green
+                    
+                    localStorage.setItem('has_course_access', 'true');
+                    
+                    setTimeout(() => {
+                        window.location.href = `course-${courseId}.html`;
+                    }, 1500);
+
+                } catch (error) {
+                    btn.textContent = `Pay Now - $${price}`;
+                    btn.style.opacity = '1';
+                    alert("Payment failed: " + error.message);
+                }
+                return;
+            }
+            
+            setTimeout(() => {
+                btn.textContent = 'Payment Successful! Redirecting...';
+                btn.style.backgroundColor = '#10b981'; // Green
+                
+                // Set access in Mock DB (Soon to be Supabase Firestore)
+                localStorage.setItem('has_course_access', 'true');
+                
+                setTimeout(() => {
+                    window.location.href = `course-${courseId}.html`;
+                }, 1000);
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم النظام (CMS) | Dr. Marwa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { margin: 0; display: flex; height: 100vh; overflow: hidden; font-family: var(--font-arabic); background: var(--bg); color: var(--text); }
+        .sidebar { width: 260px; background: var(--card-bg); border-left: 1px solid var(--border); display: flex; flex-direction: column; padding: 2rem 1rem; z-index: 10; }
+        .sidebar-logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); margin-bottom: 3rem; text-align: center; }
+        .nav-item { padding: 1rem; margin-bottom: 0.5rem; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 0.75rem; color: var(--muted); transition: 0.2s; font-size: 1.1rem; }
+        .nav-item:hover, .nav-item.active { background: rgba(20, 184, 166, 0.1); color: var(--primary); }
+        .main-content { flex: 1; padding: 3rem; overflow-y: auto; background: var(--bg); }
+        .tab-content { display: none; max-width: 1000px; margin: 0 auto; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .admin-card { background: var(--card-bg); padding: 2.5rem; border-radius: var(--border-radius); border: 1px solid var(--border); margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; color: var(--primary); font-weight: bold; font-size: 1.1rem; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 1rem; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-family: inherit; font-size: 1rem; transition: 0.3s; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        
+        .list-item { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem; border-bottom: 1px solid var(--border); background: var(--bg); border-radius: 8px; margin-bottom: 0.75rem; transition: 0.2s; }
+        .list-item:hover { transform: translateX(-5px); border-color: var(--primary); }
+        .list-item:last-child { margin-bottom: 0; }
+        .btn-danger { background: #ef4444; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; transition: 0.2s; font-weight: bold; }
+        .btn-danger:hover { background: #dc2626; transform: scale(1.05); }
+        .header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border); }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">Dr. Marwa CMS</div>
+        <div class="nav-item active" data-target="tab-posts">
+            <i class="ph ph-article"></i> <span>المقالات</span>
+        </div>
+        <div class="nav-item" data-target="tab-courses">
+            <i class="ph ph-video-camera"></i> <span>الدورات</span>
+        </div>
+        <div class="nav-item" data-target="tab-testimonials">
+            <i class="ph ph-star"></i> <span>الآراء</span>
+        </div>
+        <div style="flex: 1;"></div>
+        <a href="index.html" class="nav-item" style="color: var(--text); text-decoration: none;"><i class="ph ph-arrow-right"></i> العودة للموقع</a>
+        <div class="nav-item" id="logout-btn" style="color: #ef4444; margin-top: auto;"><i class="ph ph-sign-out"></i> تسجيل الخروج</div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- Tab: Posts -->
+        <div id="tab-posts" class="tab-content active">
+            <div class="header-flex">
+                <h1 class="arabic-text large" style="color: var(--primary);"><i class="ph ph-article" style="margin-left: 0.5rem;"></i>إدارة المقالات (Blog)</h1>
+            </div>
+            
+            <div class="admin-card">
+                <h2 class="arabic-text large mb-4">✨ إضافة مقال جديد</h2>
+                <form id="form-posts">
+                    <div class="form-group">
+                        <label>عنوان المقال</label>
+                        <input type="text" id="post-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>المقتطف (نبذة قصيرة تظهر في القائمة)</label>
+                        <textarea id="post-excerpt" rows="2" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>المحتوى الكامل</label>
+                        <textarea id="post-content" rows="6"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary arabic-text medium" style="width: 100%; font-size: 1.2rem; padding: 1rem;">نشر المقال</button>
+                </form>
+            </div>
+
+            <div class="admin-card">
+                <h2 class="arabic-text large mb-4">📂 المقالات الحالية</h2>
+                <div id="list-posts"><p class="text-center" style="color: var(--muted);">جاري التحميل...</p></div>
+            </div>
+        </div>
+
+        <!-- Tab: Courses -->
+        <div id="tab-courses" class="tab-content">
+            <div class="header-flex">
+                <h1 class="arabic-text large" style="color: var(--primary);"><i class="ph ph-video-camera" style="margin-left: 0.5rem;"></i>إدارة الدورات (Courses)</h1>
+            </div>
+            
+            <div class="admin-card">
+                <h2 class="arabic-text large mb-4">✨ إضافة دورة جديدة</h2>
+                <form id="form-courses">
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>عنوان الدورة (يمكنك إضافة HTML لـ subtitle)</label>
+                            <input type="text" id="course-title" placeholder="مثال: CBT Course <br><small>(العلاج المعرفي)</small>" required>
+                        </div>
+                        <div class="form-group">
+                            <label>السعر (دولار)</label>
+                            <input type="number" step="0.01" id="course-price" required>
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>السعر الأصلي (قبل الخصم) - اختياري</label>
+                            <input type="number" step="0.01" id="course-original-price">
+                        </div>
+                        <div class="form-group">
+                            <label>نص الخصم (مثال: Save 50%) - اختياري</label>
+                            <input type="text" id="course-discount">
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>المدة (مثال: 5 Days)</label>
+                            <input type="text" id="course-duration">
+                        </div>
+                        <div class="form-group">
+                            <label>هل هذه باقة مجمعة (Bundle)؟</label>
+                            <select id="course-is-bundle">
+                                <option value="false">لا (دورة عادية)</option>
+                                <option value="true">نعم (باقة مميزة - ستحصل على تصميم خاص)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>وصف قصير</label>
+                        <textarea id="course-excerpt" rows="2" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary arabic-text medium" style="width: 100%; font-size: 1.2rem; padding: 1rem;">إضافة الدورة</button>
+                </form>
+            </div>
+
+            <div class="admin-card">
+                <h2 class="arabic-text large mb-4">📂 الدورات الحالية</h2>
+                <div id="list-courses"><p class="text-center" style="color: var(--muted);">جاري التحميل...</p></div>
+            </div>
+        </div>
+
+        <!-- Tab: Testimonials -->
+        <div id="tab-testimonials" class="tab-content">
+            <div class="header-flex">
+                <h1 class="arabic-text large" style="color: var(--primary);"><i class="ph ph-star" style="margin-left: 0.5rem;"></i>إدارة الآراء (Testimonials)</h1>
+            </div>
+            
+            <div class="admin-card">
+                <h2 class="arabic-text large mb-4">✨ إضافة رأي عميل جديد</h2>
+                <form id="form-testimonials">
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>اسم العميل</label>
+                            <input type="text" id="test-author" placeholder="مثال: Sarah M." required>
+                        </div>
+                        <div class="form-group">
+                            <label>التقييم (من 1 إلى 5 نجوم)</label>
+                            <input type="number" min="1" max="5" id="test-rating" value="5" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>نص الرأي</label>
+                        <textarea id="test-quote" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary arabic-text medium" style="width: 100%; font-size: 1.2rem; padding: 1rem;">إضافة الرأي</button>
+                </form>
+            </div>
+
+            <div class="admin-card">
+                <h2 class="arabic-text large mb-4">📂 الآراء الحالية</h2>
+                <div id="list-testimonials"><p class="text-center" style="color: var(--muted);">جاري التحميل...</p></div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Auth Protection
+        if (!localStorage.getItem('site_current_user')) window.location.href = 'index.html';
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        });
+
+        // Tabs Logic
+        const navItems = document.querySelectorAll('.nav-item[data-target]');
+        const tabContents = document.querySelectorAll('.tab-content');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navItems.forEach(n => n.classList.remove('active'));
+                tabContents.forEach(t => t.classList.remove('active'));
+                item.classList.add('active');
+                document.getElementById(item.getAttribute('data-target')).classList.add('active');
+            });
+        });
+
+        const API_BASE_URL = 'http://localhost:3000';
+
+        // --- Fetch Functions ---
+        async function loadList(endpoint, containerId, formatter) {
+            const container = document.getElementById(containerId);
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/${endpoint}`);
+                const data = await res.json();
+                container.innerHTML = '';
+                if(!data || data.length === 0) {
+                    container.innerHTML = '<p class="arabic-text medium text-center" style="color: var(--muted); padding: 2rem;">لا توجد بيانات حالياً.</p>';
+                    return;
+                }
+                data.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'list-item';
+                    div.innerHTML = `
+                        <div style="flex:1; padding-left: 2rem;">${formatter(item)}</div>
+                        <button class="btn-danger arabic-text medium" onclick="deleteItem('${endpoint}', '${item.id}')"><i class="ph ph-trash"></i> حذف</button>
+                    `;
+                    container.appendChild(div);
+                });
+            } catch(e) { container.innerHTML = '<p class="text-center" style="color: #ef4444;">خطأ في الجلب. تأكد من تشغيل السيرفر.</p>'; }
+        }
+
+        function loadAll() {
+            loadList('posts', 'list-posts', item => `<strong style="color:var(--primary); font-size:1.2rem;">${item.title}</strong><br><small style="color:var(--muted); line-height: 1.5;">${item.excerpt}</small>`);
+            loadList('courses', 'list-courses', item => `<strong style="color:var(--primary); font-size:1.2rem;">${item.title}</strong> <span style="background:var(--card-bg); padding:4px 8px; border-radius:4px; font-weight:bold;">$${item.price}</span><br><small style="color:var(--muted);">${item.excerpt}</small>`);
+            loadList('testimonials', 'list-testimonials', item => `<strong style="color:var(--primary); font-size:1.2rem;">${item.author}</strong> - <span style="color:#f59e0b;">${'★'.repeat(item.rating)}</span><br><small style="color:var(--muted); font-style:italic;">"${item.quote}"</small>`);
+        }
+
+        loadAll();
+
+        // --- Delete Function ---
+        window.deleteItem = async function(endpoint, id) {
+            if(!confirm('هل أنت متأكد من الحذف نهائياً؟')) return;
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/${endpoint}/${id}`, { method: 'DELETE' });
+                if(!res.ok) throw new Error();
+                loadAll();
+            } catch(e) { alert('خطأ في الحذف'); }
+        };
+
+        // --- Submit Handlers ---
+        async function submitForm(formId, endpoint, bodyData) {
+            const form = document.getElementById(formId);
+            const btn = form.querySelector('button');
+            const origTxt = btn.innerHTML;
+            btn.disabled = true; btn.innerHTML = '<i class="ph ph-spinner ph-spin"></i> جاري الحفظ...';
+            try {
+                const res = await fetch(`${API_BASE_URL}/api/${endpoint}`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(bodyData)
+                });
+                if(!res.ok) throw new Error();
+                form.reset();
+                loadAll();
+                alert('تم الحفظ بنجاح! ✅');
+            } catch(e) { alert('حدث خطأ أثناء الحفظ. تأكد من تشغيل السيرفر وربطه بقاعدة البيانات.'); }
+            btn.disabled = false; btn.innerHTML = origTxt;
+        }
+
+        document.getElementById('form-posts').addEventListener('submit', e => {
+            e.preventDefault();
+            submitForm('form-posts', 'posts', {
+                title: document.getElementById('post-title').value,
+                excerpt: document.getElementById('post-excerpt').value,
+                content: document.getElementById('post-content').value
+            });
+        });
+
+        document.getElementById('form-courses').addEventListener('submit', e => {
+            e.preventDefault();
+            submitForm('form-courses', 'courses', {
+                title: document.getElementById('course-title').value,
+                price: parseFloat(document.getElementById('course-price').value),
+                original_price: parseFloat(document.getElementById('course-original-price').value) || null,
+                discount_badge: document.getElementById('course-discount').value,
+                duration: document.getElementById('course-duration').value,
+                is_bundle: document.getElementById('course-is-bundle').value === 'true',
+                excerpt: document.getElementById('course-excerpt').value,
+                image_url: 'images/placeholder.jpg' // Assuming a default placeholder since image upload isn't implemented
+            });
+        });
+
+        document.getElementById('form-testimonials').addEventListener('submit', e => {
+            e.preventDefault();
+            submitForm('form-testimonials', 'testimonials', {
+                author: document.getElementById('test-author').value,
+                rating: parseInt(document.getElementById('test-rating').value),
+                quote: document.getElementById('test-quote').value
+            });
+        });
+    </script>
+</body>
+</html>

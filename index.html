@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Marwa Badr Ahmed | أخصائية الصحة النفسية والعلاج النفسي</title>
+    <meta name="description"
+        content="Helping individuals understand themselves, build emotional resilience, and create healthier relationships through evidence-based psychological practices. د. مروة بدر أحمد - أخصائية صحة نفسية ومعالج سلوكي.">
+    <meta name="keywords" content="psychological counseling, mental health specialist, therapy, CBT, DBT, ACT, دكتورة نفسية, علاج نفسي, صحة نفسية, دكتورة مروة بدر, علاج سلوكي معرفي, علاج الصدمات, استشارات نفسية">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Dr. Marwa Badr Ahmed | Mental Health Specialist">
+    <meta property="og:description" content="Helping individuals understand themselves and build emotional resilience through evidence-based psychological practices.">
+    <meta property="og:image" content="images/profile-pic-main.png">
+
+    <!-- Google Analytics Consent Mode -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      
+      // Default consent to denied
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied'
+      });
+    </script>
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-07XVN01PR3"></script>
+    <script>
+      gtag('js', new Date());
+      gtag('config', 'G-07XVN01PR3');
+    </script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons for elegant minimalist icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" style="display: flex; align-items: center; gap: 0.5rem; white-space: nowrap;">
+                <img src="images/profile-pic-nav.png" alt="Dr. Marwa Logo" class="logo-img">
+                Dr. Marwa
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#booking" class="btn-primary-small">Book Session</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="nav-group-middle" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <div class="auth-buttons" id="auth-buttons">
+                        <button class="btn-outline auth-btn-nav" id="login-btn">Log In</button>
+                    </div>
+                    <div class="user-profile" id="user-profile"
+                        style="display: none; align-items: center; gap: 0.5rem; font-weight: 500;">
+                        <i class="ph ph-user-circle" style="font-size: 1.5rem; color: var(--primary);"></i>
+                        <span id="user-name-display"></span>
+                        <button id="logout-btn"
+                            style="background: none; border: none; color: var(--muted); cursor: pointer; font-size: 0.8rem; text-decoration: underline;">Logout</button>
+                    </div>
+                </div>
+                <div class="nav-group-right" style="display: flex; align-items: center; gap: 0.5rem;">
+
+                    <button id="theme-toggle" aria-label="Toggle Theme">
+                        <i class="ph ph-sun" id="theme-icon-light"></i>
+                        <i class="ph ph-moon" id="theme-icon-dark"></i>
+                    </button>
+                    <div class="hamburger" id="mobile-menu-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#about" class="mobile-link">About</a>
+            <a href="#expertise" class="mobile-link">Expertise</a>
+            <a href="#courses" class="mobile-link">Courses</a>
+            <a href="#booking" class="mobile-link btn-primary-mobile">Book Session</a>
+        </div>
+    </nav>
+
+    <main style="position: relative; overflow-x: hidden;">
+        <style>
+            @keyframes floatAnim {
+                0% { transform: translateY(0) rotate(0deg); }
+                50% { transform: translateY(-20px) rotate(5deg); }
+                100% { transform: translateY(0) rotate(0deg); }
+            }
+        </style>
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero section-padding">
+            <div class="container hero-content animate-on-scroll fade-up">
+                <div class="hero-text">
+                    <span class="badge">Mental Health Specialist</span>
+                    <h1>Dr. Marwa Badr Ahmed</h1>
+                    <h2 class="subtitle">Family, Marital & Educational Counselor | Psychological Trainer</h2>
+                    <p class="intro">
+                        Helping individuals understand themselves, build emotional resilience, and create healthier
+                        relationships through evidence-based psychological practices.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#booking" class="btn-primary">Book Free Consultation</a>
+                        <a href="#courses" class="btn-secondary">Explore Courses</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="blob-shape"></div>
+                    <div class="profile-image-container animate-profile">
+                        <img src="images/profile-pic-main.png" alt="Dr. Marwa Badr Ahmed" id="profile-img" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; z-index: 2; position: relative;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about section-padding alt-bg">
+            <div class="container animate-on-scroll fade-up">
+                <div class="section-header">
+                    <h2>About Me</h2>
+                    <div class="divider"></div>
+                </div>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>I am a Mental Health Specialist with several years of experience in psychological counseling,
+                            family and marital guidance, and self-development training. My work is rooted in a deep
+                            belief that awareness is the first step toward healing and transformation.</p>
+                        <p>I specialize in <strong>Cognitive Behavioral Therapy (CBT)</strong>, <strong>Dialectical
+                                Behavior Therapy (DBT)</strong>, and <strong>Acceptance & Commitment Therapy
+                                (ACT)</strong>, using structured, evidence-based approaches to help individuals regulate
+                            emotions, overcome anxiety, and rebuild their sense of identity.</p>
+                        <p>Through both one-on-one sessions and group programs, I aim to create meaningful, lasting
+                            impact in people’s lives by helping them develop clarity, emotional strength, and healthier
+                            behavioral patterns.</p>
+                    </div>
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <i class="ph ph-users"></i>
+                            <h4>Family Therapy</h4>
+                            <p>Building stronger connections</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="ph ph-brain"></i>
+                            <h4>CBT & DBT & ACT</h4>
+                            <p>Evidence-based approaches</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="ph ph-chalkboard-teacher"></i>
+                            <h4>Training</h4>
+                            <p>Empowering self-development</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expertise (Skills, Services, Experience) -->
+        <section id="expertise" class="expertise section-padding">
+            <div class="container animate-on-scroll fade-up">
+                <div class="section-header center">
+                    <h2>My Expertise</h2>
+                    <div class="divider mx-auto"></div>
+                </div>
+
+                <div class="expertise-tabs">
+                    <button class="tab-btn active" data-tab="skills">Skills</button>
+                    <button class="tab-btn" data-tab="services">Services</button>
+                    <button class="tab-btn" data-tab="experience">Experience</button>
+                </div>
+
+                <!-- Skills Tab -->
+                <div class="tab-content active" id="tab-skills">
+                    <div class="grid-3">
+                        <div class="skill-card">
+                            <div class="icon-wrapper"><i class="ph ph-puzzle-piece"></i></div>
+                            <h3>Psychological Techniques</h3>
+                            <ul>
+                                <li>CBT, DBT, ACT</li>
+                                <li>Trauma Counseling</li>
+                                <li>Emotional Regulation</li>
+                            </ul>
+                        </div>
+                        <div class="skill-card">
+                            <div class="icon-wrapper"><i class="ph ph-users-three"></i></div>
+                            <h3>Counseling Areas</h3>
+                            <ul>
+                                <li>Family Counseling</li>
+                                <li>Marital Therapy</li>
+                                <li>Adolescent Counseling</li>
+                                <li>Relationship Issues</li>
+                            </ul>
+                        </div>
+                        <div class="skill-card">
+                            <div class="icon-wrapper"><i class="ph ph-clipboard-text"></i></div>
+                            <h3>Professional Skills</h3>
+                            <ul>
+                                <li>Psychological Assessment</li>
+                                <li>Case Formulation</li>
+                                <li>Crisis Intervention</li>
+                            </ul>
+                        </div>
+                        <div class="skill-card">
+                            <div class="icon-wrapper"><i class="ph ph-presentation-chart"></i></div>
+                            <h3>Training & Development</h3>
+                            <ul>
+                                <li>Workshop Design</li>
+                                <li>Public Speaking</li>
+                                <li>Program Development & Coaching</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services Tab -->
+                <div class="tab-content" id="tab-services">
+                    <div class="grid-2">
+                        <div class="service-card">
+                            <i class="ph ph-user"></i>
+                            <h3>Individual Psychological Counseling</h3>
+                            <p>One-on-one sessions focused on your unique emotional and psychological needs.</p>
+                        </div>
+                        <div class="service-card">
+                            <i class="ph ph-house-line"></i>
+                            <h3>Family & Marital Therapy</h3>
+                            <p>Guidance to resolve conflicts and build healthier family dynamics and partnerships.</p>
+                        </div>
+                        <div class="service-card">
+                            <i class="ph ph-books"></i>
+                            <h3>Mental Health Training Programs</h3>
+                            <p>Structured group programs designed to foster resilience and coping strategies.</p>
+                        </div>
+                        <div class="service-card">
+                            <i class="ph ph-heartbeat"></i>
+                            <h3>Emotional Awareness Coaching</h3>
+                            <p>Developing clarity and emotional strength to navigate life's challenges.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience Tab -->
+                <div class="tab-content" id="tab-experience">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="date">2026 – Present</span>
+                                <h3>Psychological Trainer</h3>
+                                <h4>Nafsiati Center</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="date">2025 – Present</span>
+                                <h3>Psychological Counselor</h3>
+                                <h4>Social Prime Center</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="date">2024 – Present</span>
+                                <h3>Freelance Online Counselor</h3>
+                                <h4>Independent Practice</h4>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="date">2021 – 2022</span>
+                                <h3>Social Counselor</h3>
+                                <h4>EG School</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Courses Section -->
+        <section id="courses" class="courses section-padding alt-bg">
+            <div class="container animate-on-scroll fade-up">
+                <div class="section-header">
+                    <h2>Online Courses</h2>
+                    <div class="divider"></div>
+                    <p class="section-subtitle">Unlock your potential with specialized digital courses.</p>
+                </div>
+
+                <div class="courses-grid" id="home-courses-container">
+                    <div class="loading-state text-center" style="grid-column: 1 / -1; padding: 4rem;">
+                        <i class="ph ph-spinner ph-spin" style="font-size: 3rem; color: var(--primary);"></i>
+                        <p class="medium" style="margin-top: 1rem; color: var(--muted);">Loading Courses...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Quiz Section -->
+        <section id="quiz" class="quiz section-padding">
+            <div class="container animate-on-scroll fade-up text-center">
+                <div class="glass-panel" style="padding: 3rem; text-align: center; border-radius: var(--border-radius); border: 1px solid var(--primary);">
+                    <h2 style="margin-bottom: 1rem;">Not sure where to start?</h2>
+                    <p style="color: var(--muted); margin-bottom: 2rem;">Take our quick assessment to find out which therapy program fits your current needs.</p>
+                    <button class="btn-primary" id="open-quiz-btn" style="font-size: 1.1rem; padding: 1rem 2rem;">Take the Free Quiz</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Comparison Section -->
+        <section id="pricing" class="pricing section-padding alt-bg">
+            <div class="container animate-on-scroll fade-up">
+                <div class="section-header center">
+                    <h2>Pricing Options</h2>
+                    <div class="divider mx-auto"></div>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: var(--border-radius); overflow: hidden; border: 1px solid var(--border);">
+                        <thead>
+                            <tr style="background: rgba(20, 184, 166, 0.1);">
+                                <th style="padding: 1rem; text-align: left; border-bottom: 1px solid var(--border);">Features</th>
+                                <th style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border);">Individual Courses<br><small style="font-weight: normal; color: var(--muted);">(from $74.99)</small></th>
+                                <th style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border); background: var(--primary); color: white;">Tri-Therapy Bundle<br><small style="font-weight: normal; color: rgba(255,255,255,0.8);">($299.99)</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid var(--border);">Specific Therapy Focus</td>
+                                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border); color: var(--primary);">✓</td>
+                                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border); color: var(--primary);">✓</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid var(--border);">Comprehensive Framework</td>
+                                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border); color: var(--muted);">-</td>
+                                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border); color: var(--primary);">✓</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid var(--border);">Lifetime Access</td>
+                                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border); color: var(--primary);">✓</td>
+                                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border); color: var(--primary);">✓</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid var(--border);">Value / Savings</td>
+                                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border); color: var(--muted);">Standard</td>
+                                <td style="padding: 1rem; text-align: center; border-bottom: 1px solid var(--border); color: #ef4444; font-weight: bold;">Save 25%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials section-padding">
+            <div class="container animate-on-scroll fade-up">
+                <div class="section-header center">
+                    <h2>Success Stories</h2>
+                    <div class="divider mx-auto"></div>
+                </div>
+                <div class="grid-3" id="home-testimonials-container">
+                    <div class="loading-state text-center" style="grid-column: 1 / -1; padding: 4rem;">
+                        <i class="ph ph-spinner ph-spin" style="font-size: 3rem; color: var(--primary);"></i>
+                        <p class="medium" style="margin-top: 1rem; color: var(--muted);">Loading Testimonials...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Section -->
+        <section id="booking" class="booking section-padding">
+            <div class="container animate-on-scroll fade-up">
+                <div class="booking-wrapper glass-panel">
+                    <div class="booking-text">
+                        <h2>Book a Free Session</h2>
+                        <p>Take the first step towards emotional well-being. Schedule a free consultation to discuss how
+                            we can work together.</p>
+                        <a href="https://cal.com/dr-marwa-badr/client-appointment" target="_blank"
+                            rel="noopener noreferrer" class="btn-primary external-booking-btn">Book on Cal.com</a>
+                    </div>
+                    <div class="booking-image" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; padding: 1rem;">
+                        <img src="images/book-now-v4.png" alt="Book a Session" class="booking-poster">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog/Articles Section -->
+        <section id="blog" class="blog section-padding">
+            <div class="container animate-on-scroll fade-up">
+                <div class="section-header center">
+                    <h2>Latest Articles</h2>
+                    <div class="divider mx-auto"></div>
+                    <p class="section-subtitle arabic-text medium">مقالات للصحة النفسية وتطوير الذات</p>
+                </div>
+                <div class="grid-3" id="blog-posts-container">
+                    <!-- Sample Blog Post 1 -->
+                    <div class="glass-card blog-card" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                        <h3 class="arabic-text large" style="color: var(--primary);">كيف تتعامل مع نوبات القلق؟</h3>
+                        <p class="arabic-text medium" style="color: var(--muted); flex-grow: 1;">خطوات عملية مبنية على العلاج المعرفي السلوكي للتعامل مع نوبات الهلع والقلق المفاجئ...</p>
+                        <a href="blog.html#post1" class="btn-outline arabic-text medium" style="align-self: flex-start; padding: 0.5rem 1rem;">اقرأ المزيد</a>
+                    </div>
+                    <!-- Sample Blog Post 2 -->
+                    <div class="glass-card blog-card" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                        <h3 class="arabic-text large" style="color: var(--primary);">قوة التقبل (ACT)</h3>
+                        <p class="arabic-text medium" style="color: var(--muted); flex-grow: 1;">لماذا يعتبر تقبل المشاعر السلبية هو الخطوة الأولى للتعافي والصحة النفسية المستدامة...</p>
+                        <a href="blog.html#post2" class="btn-outline arabic-text medium" style="align-self: flex-start; padding: 0.5rem 1rem;">اقرأ المزيد</a>
+                    </div>
+                    <!-- Sample Blog Post 3 -->
+                    <div class="glass-card blog-card" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                        <h3 class="arabic-text large" style="color: var(--primary);">بناء حدود صحية</h3>
+                        <p class="arabic-text medium" style="color: var(--muted); flex-grow: 1;">كيف ترسم حدودك في العلاقات دون أن تشعر بالذنب، للحفاظ على طاقتك وسلامك الداخلي...</p>
+                        <a href="blog.html#post3" class="btn-outline arabic-text medium" style="align-self: flex-start; padding: 0.5rem 1rem;">اقرأ المزيد</a>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="blog.html" class="btn-primary arabic-text medium">تصفح المدونة كاملة</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact section-padding alt-bg">
+            <div class="container animate-on-scroll fade-up">
+                <div class="section-header center">
+                    <h2>Get In Touch</h2>
+                    <div class="divider mx-auto"></div>
+                    <p class="section-subtitle">Have an inquiry or want to send a message? Reach out below.</p>
+                </div>
+                <div class="contact-wrapper glass-card" style="max-width: 600px; margin: 0 auto; padding: 2rem;">
+                    <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                        <!-- Web3Forms Access Key: Replace this with your actual key from web3forms.com -->
+                        <input type="hidden" name="access_key" value=9d8affa7-79dd-41e4-a9d6-0587948e964f>
+
+                        <div class="form-group" style="margin-bottom: 1rem;">
+                            <input type="text" name="name" placeholder="Your Name" required
+                                style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: var(--border-radius-sm); background-color: var(--bg); color: var(--text);">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 1rem;">
+                            <input type="email" name="email" placeholder="Your Email" required
+                                style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: var(--border-radius-sm); background-color: var(--bg); color: var(--text);">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 1rem;">
+                            <textarea name="message" rows="5" placeholder="Your Message or Inquiry" required
+                                style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: var(--border-radius-sm); background-color: var(--bg); color: var(--text); resize: vertical;"></textarea>
+                        </div>
+                        <!-- Honeypot Spam Protection -->
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                        <button type="submit" class="btn-primary" style="width: 100%">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <h2>Dr. Marwa</h2>
+                    <p>Mental Health Specialist & Counselor.</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                        <li><a href="#about">About Me</a></li>
+                        <li><a href="#expertise">Expertise</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#booking">Book Session</a></li>
+                        <li><a href="terms.html">Terms & Conditions</a></li>
+                        <li><a href="refund-policy.html">Refund Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/1QuzdWAdoe/" target="_blank" rel="noopener noreferrer"
+                            aria-label="Facebook"><i class="ph ph-facebook-logo"></i></a>
+                        <a href="https://www.instagram.com/dr_marwa_badr?igsh=YzB6cnplZnkzeTgx" target="_blank"
+                            rel="noopener noreferrer" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
+                        <a href="https://www.tiktok.com/@dr_marwa_badr?is_from_webapp=1&sender_device=pc" target="_blank"
+                            rel="noopener noreferrer" aria-label="TikTok"><i class="ph ph-tiktok-logo"></i></a>
+                        <a href="https://www.linkedin.com/in/dr-marwa-badr" target="_blank" rel="noopener noreferrer"
+                            aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+                        <a href="https://www.youtube.com/channel/UCI6KQEvAGweVn11Ozufwd0g" target="_blank" rel="noopener noreferrer"
+                            aria-label="YouTube"><i class="ph ph-youtube-logo"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Dr. Marwa Badr Ahmed. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="auth-modal">
+        <div class="modal-content">
+            <button class="close-modal"><i class="ph ph-x"></i></button>
+            <div class="auth-tabs" style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                <button class="tab-btn active" id="tab-login"
+                    style="flex: 1; padding: 0.5rem; background: none; border: none; color: var(--primary); font-weight: bold; border-bottom: 2px solid var(--primary); cursor: pointer;">Log
+                    In</button>
+                <button class="tab-btn" id="tab-signup"
+                    style="flex: 1; padding: 0.5rem; background: none; border: none; color: var(--muted); font-weight: bold; border-bottom: 2px solid transparent; cursor: pointer;">Sign
+                    Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form class="subscription-form" id="login-form" onsubmit="event.preventDefault(); window.loginUser();">
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button type="submit" class="btn-primary" style="width: 100%">Log In</button>
+            </form>
+
+            <!-- Signup Form -->
+            <form class="subscription-form" id="signup-form" style="display: none;"
+                onsubmit="event.preventDefault(); window.registerUser();">
+                <input type="text" id="signup-name" placeholder="Full Name" required>
+                <input type="email" id="signup-email" placeholder="Email" required>
+                <input type="password" id="signup-password" placeholder="Password" required>
+                <button type="submit" class="btn-primary" style="width: 100%">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Course Modal -->
+    <div class="modal" id="course-modal">
+        <div class="modal-content">
+            <button class="close-modal"><i class="ph ph-x"></i></button>
+            <h3 id="modal-title">Subscribe to Access</h3>
+            <p id="modal-desc">Secure your spot in this course to get full access to video materials, worksheets, and
+                community discussions.</p>
+            <a href="checkout.html" id="proceed-checkout-btn" class="btn-primary"
+                style="width: 100%; display: block; text-align: center; margin-top: 1rem;">Proceed to Checkout
+                (Visa)</a>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div class="modal" id="quiz-modal">
+        <div class="modal-content" style="max-width: 600px; text-align: right;" dir="rtl">
+            <button class="close-modal" onclick="document.getElementById('quiz-modal').classList.remove('active')"><i class="ph ph-x"></i></button>
+            <h3 class="arabic-text large" style="margin-bottom: 1.5rem; color: var(--primary);">أي برنامج علاجي هو الأنسب لك؟</h3>
+            
+            <div id="quiz-question-container" class="arabic-text medium">
+                <p style="margin-bottom: 1.5rem; font-weight: 500; font-size: 1.1rem;">ما هو التحدي الأساسي الذي يؤثر على جودة حياتك حالياً؟</p>
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                    <button class="btn-outline quiz-answer-btn arabic-text medium" data-result="1" style="text-align: right; padding: 1rem; width: 100%; border-radius: 8px;">
+                        <strong>التعافي من الصدمات:</strong> أعاني من ذكريات مؤلمة وتراكمات من الماضي تمنعني من التقدم.
+                    </button>
+                    <button class="btn-outline quiz-answer-btn arabic-text medium" data-result="2" style="text-align: right; padding: 1rem; width: 100%; border-radius: 8px;">
+                        <strong>التفكير المفرط:</strong> تسيطر عليّ الأفكار السلبية، القلق الدائم، والمخاوف.
+                    </button>
+                    <button class="btn-outline quiz-answer-btn arabic-text medium" data-result="3" style="text-align: right; padding: 1rem; width: 100%; border-radius: 8px;">
+                        <strong>التقلبات المزاجية:</strong> أواجه صعوبة كبيرة في السيطرة على انفعالاتي ومشاكل متكررة في علاقاتي.
+                    </button>
+                    <button class="btn-outline quiz-answer-btn arabic-text medium" data-result="5" style="text-align: right; padding: 1rem; width: 100%; border-radius: 8px;">
+                        <strong>فقدان المعنى:</strong> أشعر بالضياع، وأجد صعوبة في تقبل مشاعري أو تحديد قيمي في الحياة.
+                    </button>
+                    <button class="btn-outline quiz-answer-btn arabic-text medium" data-result="4" style="text-align: right; padding: 1rem; width: 100%; border-radius: 8px;">
+                        <strong>أنماط الشخصية:</strong> لدي أنماط سلوكية قهرية ومتكررة تسبب لي صدامات دائمة مع من حولي.
+                    </button>
+                    <button class="btn-outline quiz-answer-btn arabic-text medium" data-result="6" style="text-align: right; padding: 1rem; width: 100%; border-radius: 8px; border-color: var(--primary); background: rgba(20, 184, 166, 0.05);">
+                        <strong>تحديات متعددة:</strong> أعاني من القلق وتقلب المزاج معاً وأبحث عن خطة علاجية شاملة ومكثفة.
+                    </button>
+                </div>
+            </div>
+            
+            <div id="quiz-result-container" class="arabic-text medium" style="display: none; text-align: center;">
+                <p style="margin-bottom: 1rem; color: var(--muted); font-size: 1.1rem;">بناءً على التقييم العلمي لحالتك، البرنامج الأنسب لك هو:</p>
+                <h2 id="quiz-recommendation" class="arabic-text large" style="color: var(--primary); margin-bottom: 1rem; font-size: 1.8rem;">رحلة تعافي</h2>
+                <p id="quiz-explanation" style="margin-bottom: 1.5rem; color: var(--text); line-height: 1.6; font-size: 0.95rem;"></p>
+                <a href="#courses" id="quiz-close-btn" class="btn-primary arabic-text medium" onclick="document.getElementById('quiz-modal').classList.remove('active')" style="width: 100%; display: block; text-align: center; padding: 1rem;">عرض تفاصيل البرنامج</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky CTA -->
+    <a href="#courses" class="sticky-cta" id="sticky-cta" style="position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: white; padding: 1rem 1.5rem; border-radius: 50px; font-weight: bold; box-shadow: 0 10px 20px rgba(0,0,0,0.2); z-index: 1000; opacity: 0; pointer-events: none; transform: translateY(20px); transition: all 0.3s ease;">Start Your Transformation</a>
+
+    <!-- Supabase SDK removed as we now use Node.js backend -->
+    
+    <!-- Floating Icons Logic Removed as per request -->
+    
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/96560695570" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" style="position: fixed; bottom: 20px; left: 20px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; transition: transform 0.3s ease;">
+        <i class="ph ph-whatsapp-logo"></i>
+    </a>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent-banner" style="display: none; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 700px; padding: 1.5rem 2rem; z-index: 9999; background-color: var(--card-bg); box-shadow: 0 15px 50px rgba(0,0,0,0.5); border: 2px solid var(--primary); border-radius: 16px; flex-direction: column; gap: 1rem; align-items: center; justify-content: space-between; text-align: center;">
+        <div style="flex: 1;">
+            <p style="margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text);">We use cookies to improve your experience and analyze website traffic. By clicking "Accept", you consent to our use of cookies.</p>
+        </div>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; width: 100%;">
+            <button id="accept-cookies" class="btn-primary" style="flex: 1; min-width: 120px;">Accept</button>
+            <button id="decline-cookies" class="btn-outline" style="flex: 1; min-width: 120px; border-color: var(--muted); color: var(--muted);">Decline</button>
+        </div>
+    </div>
+
+    <!-- Custom Scripts -->
+    <script src="js/analytics.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
