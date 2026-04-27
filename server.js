@@ -155,6 +155,14 @@ app.post('/api/posts', async (req, res) => {
     res.status(201).json({ message: 'Post created successfully', data });
 });
 
+app.put('/api/posts/:id', async (req, res) => {
+    const { id } = req.params;
+    const { title, excerpt, content } = req.body;
+    const { data, error } = await supabase.from('posts').update({ title, excerpt, content }).eq('id', id);
+    if (error) return res.status(400).json({ error: error.message });
+    res.json({ message: 'Post updated successfully', data });
+});
+
 app.delete('/api/posts/:id', async (req, res) => {
     const { id } = req.params;
     const { error } = await supabase.from('posts').delete().eq('id', id);
@@ -172,6 +180,16 @@ app.post('/api/courses', async (req, res) => {
     res.status(201).json({ message: 'Course created successfully', data });
 });
 
+app.put('/api/courses/:id', async (req, res) => {
+    const { id } = req.params;
+    const { title, price, original_price, discount_badge, duration, excerpt, is_bundle, image_url } = req.body;
+    const { data, error } = await supabase.from('courses').update({ 
+        title, price, original_price: original_price || null, discount_badge, duration, excerpt, is_bundle, image_url 
+    }).eq('id', id);
+    if (error) return res.status(400).json({ error: error.message });
+    res.json({ message: 'Course updated successfully', data });
+});
+
 app.delete('/api/courses/:id', async (req, res) => {
     const { id } = req.params;
     const { error } = await supabase.from('courses').delete().eq('id', id);
@@ -185,6 +203,14 @@ app.post('/api/testimonials', async (req, res) => {
     const { data, error } = await supabase.from('testimonials').insert([{ author, quote, rating }]);
     if (error) return res.status(400).json({ error: error.message });
     res.status(201).json({ message: 'Testimonial created successfully', data });
+});
+
+app.put('/api/testimonials/:id', async (req, res) => {
+    const { id } = req.params;
+    const { author, quote, rating } = req.body;
+    const { data, error } = await supabase.from('testimonials').update({ author, quote, rating }).eq('id', id);
+    if (error) return res.status(400).json({ error: error.message });
+    res.json({ message: 'Testimonial updated successfully', data });
 });
 
 app.delete('/api/testimonials/:id', async (req, res) => {
