@@ -81,7 +81,9 @@ app.get('/api/posts', async (req, res) => {
         // We assume you have a 'posts' table in Supabase
         const { data, error } = await supabase
             .from('posts')
-            .select('*');
+            .select('*')
+            .order('order_index', { ascending: true, nullsFirst: false })
+            .order('id', { ascending: false });
 
         if (error) {
             console.error("Error fetching posts from DB:", error);
@@ -109,7 +111,7 @@ app.get('/api/posts', async (req, res) => {
 // Get all courses from Supabase
 app.get('/api/courses', async (req, res) => {
     try {
-        const { data, error } = await supabase.from('courses').select('*').order('id', { ascending: true });
+        const { data, error } = await supabase.from('courses').select('*').order('order_index', { ascending: true, nullsFirst: false }).order('id', { ascending: true });
 
         if (error || !data || data.length === 0) {
             // Fallback to dummy data
@@ -128,7 +130,7 @@ app.get('/api/courses', async (req, res) => {
 // Get all testimonials from Supabase
 app.get('/api/testimonials', async (req, res) => {
     try {
-        const { data, error } = await supabase.from('testimonials').select('*').order('id', { ascending: false });
+        const { data, error } = await supabase.from('testimonials').select('*').order('order_index', { ascending: true, nullsFirst: false }).order('id', { ascending: false });
 
         if (error || !data || data.length === 0) {
             return res.json([
@@ -155,6 +157,8 @@ app.post('/api/posts', async (req, res) => {
     res.status(201).json({ message: 'Post created successfully', data });
 });
 
+app.put('/api/posts/reorder', (req, res) => handleReorder(req, res, 'posts'));
+
 app.put('/api/posts/:id', async (req, res) => {
     const { id } = req.params;
     const { title, excerpt, content } = req.body;
@@ -180,6 +184,8 @@ app.post('/api/courses', async (req, res) => {
     res.status(201).json({ message: 'Course created successfully', data });
 });
 
+app.put('/api/courses/reorder', (req, res) => handleReorder(req, res, 'courses'));
+
 app.put('/api/courses/:id', async (req, res) => {
     const { id } = req.params;
     const { title, price, original_price, discount_badge, duration, excerpt, is_bundle, image_url } = req.body;
@@ -204,6 +210,8 @@ app.post('/api/testimonials', async (req, res) => {
     if (error) return res.status(400).json({ error: error.message });
     res.status(201).json({ message: 'Testimonial created successfully', data });
 });
+
+app.put('/api/testimonials/reorder', (req, res) => handleReorder(req, res, 'testimonials'));
 
 app.put('/api/testimonials/:id', async (req, res) => {
     const { id } = req.params;
