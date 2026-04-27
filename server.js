@@ -149,6 +149,22 @@ app.get('/api/testimonials', async (req, res) => {
 // ADMIN ENDPOINTS
 // ==========================================
 
+// --- REORDER HELPER ---
+async function handleReorder(req, res, table) {
+    const { items } = req.body; // Array of { id, order_index }
+    if (!items || !Array.isArray(items)) return res.status(400).json({ error: 'Invalid items array' });
+    
+    try {
+        const promises = items.map(item => 
+            supabase.from(table).update({ order_index: item.order_index }).eq('id', item.id)
+        );
+        await Promise.all(promises);
+        res.json({ message: 'Reordered successfully' });
+    } catch(err) {
+        res.status(500).json({ error: err.message });
+    }
+}
+
 // --- POSTS ---
 app.post('/api/posts', async (req, res) => {
     const { title, excerpt, content } = req.body;
