@@ -112,9 +112,9 @@
             <div class="container hero-content animate-on-scroll fade-up">
                 <div class="hero-text">
                     <span class="badge">Mental Health Specialist</span>
-                    <h1>Dr. Marwa Badr Ahmed</h1>
-                    <h2 class="subtitle">Family, Marital & Educational Counselor | Psychological Trainer</h2>
-                    <p class="intro">
+                    <h1 id="hero-title">Dr. Marwa Badr Ahmed</h1>
+                    <h2 class="subtitle" id="hero-subtitle">Family, Marital & Educational Counselor | Psychological Trainer</h2>
+                    <p class="intro" id="hero-content">
                         Helping individuals understand themselves, build emotional resilience, and create healthier
                         relationships through evidence-based psychological practices.
                     </p>
@@ -130,17 +130,20 @@
                     </div>
                 </div>
             </div>
+            <div class="modern-divider">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path></svg>
+            </div>
         </section>
 
         <!-- About Section -->
         <section id="about" class="about section-padding alt-bg">
             <div class="container animate-on-scroll fade-up">
                 <div class="section-header">
-                    <h2>About Me</h2>
+                    <h2 id="about-title">About Me</h2>
                     <div class="divider"></div>
                 </div>
                 <div class="about-grid">
-                    <div class="about-text">
+                    <div class="about-text" id="about-content">
                         <p>I am a Mental Health Specialist with several years of experience in psychological counseling,
                             family and marital guidance, and self-development training. My work is rooted in a deep
                             belief that awareness is the first step toward healing and transformation.</p>
@@ -171,13 +174,16 @@
                     </div>
                 </div>
             </div>
+            <div class="modern-divider">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path></svg>
+            </div>
         </section>
 
         <!-- Expertise (Skills, Services, Experience) -->
         <section id="expertise" class="expertise section-padding">
             <div class="container animate-on-scroll fade-up">
                 <div class="section-header center">
-                    <h2>My Expertise</h2>
+                    <h2 id="expertise-title">My Expertise</h2>
                     <div class="divider mx-auto"></div>
                 </div>
 
@@ -187,113 +193,118 @@
                     <button class="tab-btn" data-tab="experience">Experience</button>
                 </div>
 
-                <!-- Skills Tab -->
-                <div class="tab-content active" id="tab-skills">
-                    <div class="grid-3">
-                        <div class="skill-card">
-                            <div class="icon-wrapper"><i class="ph ph-puzzle-piece"></i></div>
-                            <h3>Psychological Techniques</h3>
-                            <ul>
-                                <li>CBT, DBT, ACT</li>
-                                <li>Trauma Counseling</li>
-                                <li>Emotional Regulation</li>
-                            </ul>
+                <div id="expertise-content">
+                    <!-- Skills Tab -->
+                    <div class="tab-content active" id="tab-skills">
+                        <div class="grid-3">
+                            <div class="skill-card">
+                                <div class="icon-wrapper"><i class="ph ph-puzzle-piece"></i></div>
+                                <h3>Psychological Techniques</h3>
+                                <ul>
+                                    <li>CBT, DBT, ACT</li>
+                                    <li>Trauma Counseling</li>
+                                    <li>Emotional Regulation</li>
+                                </ul>
+                            </div>
+                            <div class="skill-card">
+                                <div class="icon-wrapper"><i class="ph ph-users-three"></i></div>
+                                <h3>Counseling Areas</h3>
+                                <ul>
+                                    <li>Family Counseling</li>
+                                    <li>Marital Therapy</li>
+                                    <li>Adolescent Counseling</li>
+                                    <li>Relationship Issues</li>
+                                </ul>
+                            </div>
+                            <div class="skill-card">
+                                <div class="icon-wrapper"><i class="ph ph-clipboard-text"></i></div>
+                                <h3>Professional Skills</h3>
+                                <ul>
+                                    <li>Psychological Assessment</li>
+                                    <li>Case Formulation</li>
+                                    <li>Crisis Intervention</li>
+                                </ul>
+                            </div>
+                            <div class="skill-card">
+                                <div class="icon-wrapper"><i class="ph ph-presentation-chart"></i></div>
+                                <h3>Training & Development</h3>
+                                <ul>
+                                    <li>Workshop Design</li>
+                                    <li>Public Speaking</li>
+                                    <li>Program Development & Coaching</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="skill-card">
-                            <div class="icon-wrapper"><i class="ph ph-users-three"></i></div>
-                            <h3>Counseling Areas</h3>
-                            <ul>
-                                <li>Family Counseling</li>
-                                <li>Marital Therapy</li>
-                                <li>Adolescent Counseling</li>
-                                <li>Relationship Issues</li>
-                            </ul>
+                    </div>
+
+                    <!-- Services Tab -->
+                    <div class="tab-content" id="tab-services">
+                        <div class="grid-2">
+                            <div class="service-card">
+                                <i class="ph ph-user"></i>
+                                <h3>Individual Psychological Counseling</h3>
+                                <p>One-on-one sessions focused on your unique emotional and psychological needs.</p>
+                            </div>
+                            <div class="service-card">
+                                <i class="ph ph-house-line"></i>
+                                <h3>Family & Marital Therapy</h3>
+                                <p>Guidance to resolve conflicts and build healthier family dynamics and partnerships.</p>
+                            </div>
+                            <div class="service-card">
+                                <i class="ph ph-books"></i>
+                                <h3>Mental Health Training Programs</h3>
+                                <p>Structured group programs designed to foster resilience and coping strategies.</p>
+                            </div>
+                            <div class="service-card">
+                                <i class="ph ph-heartbeat"></i>
+                                <h3>Emotional Awareness Coaching</h3>
+                                <p>Developing clarity and emotional strength to navigate life's challenges.</p>
+                            </div>
                         </div>
-                        <div class="skill-card">
-                            <div class="icon-wrapper"><i class="ph ph-clipboard-text"></i></div>
-                            <h3>Professional Skills</h3>
-                            <ul>
-                                <li>Psychological Assessment</li>
-                                <li>Case Formulation</li>
-                                <li>Crisis Intervention</li>
-                            </ul>
-                        </div>
-                        <div class="skill-card">
-                            <div class="icon-wrapper"><i class="ph ph-presentation-chart"></i></div>
-                            <h3>Training & Development</h3>
-                            <ul>
-                                <li>Workshop Design</li>
-                                <li>Public Speaking</li>
-                                <li>Program Development & Coaching</li>
-                            </ul>
+                    </div>
+
+                    <!-- Experience Tab -->
+                    <div class="tab-content" id="tab-experience">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <span class="date">2026 – Present</span>
+                                    <h3>Psychological Trainer</h3>
+                                    <h4>Nafsiati Center</h4>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <span class="date">2025 – Present</span>
+                                    <h3>Psychological Counselor</h3>
+                                    <h4>Social Prime Center</h4>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <span class="date">2024 – Present</span>
+                                    <h3>Freelance Online Counselor</h3>
+                                    <h4>Independent Practice</h4>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <span class="date">2021 – 2022</span>
+                                    <h3>Social Counselor</h3>
+                                    <h4>EG School</h4>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Services Tab -->
-                <div class="tab-content" id="tab-services">
-                    <div class="grid-2">
-                        <div class="service-card">
-                            <i class="ph ph-user"></i>
-                            <h3>Individual Psychological Counseling</h3>
-                            <p>One-on-one sessions focused on your unique emotional and psychological needs.</p>
-                        </div>
-                        <div class="service-card">
-                            <i class="ph ph-house-line"></i>
-                            <h3>Family & Marital Therapy</h3>
-                            <p>Guidance to resolve conflicts and build healthier family dynamics and partnerships.</p>
-                        </div>
-                        <div class="service-card">
-                            <i class="ph ph-books"></i>
-                            <h3>Mental Health Training Programs</h3>
-                            <p>Structured group programs designed to foster resilience and coping strategies.</p>
-                        </div>
-                        <div class="service-card">
-                            <i class="ph ph-heartbeat"></i>
-                            <h3>Emotional Awareness Coaching</h3>
-                            <p>Developing clarity and emotional strength to navigate life's challenges.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Experience Tab -->
-                <div class="tab-content" id="tab-experience">
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <span class="date">2026 – Present</span>
-                                <h3>Psychological Trainer</h3>
-                                <h4>Nafsiati Center</h4>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <span class="date">2025 – Present</span>
-                                <h3>Psychological Counselor</h3>
-                                <h4>Social Prime Center</h4>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <span class="date">2024 – Present</span>
-                                <h3>Freelance Online Counselor</h3>
-                                <h4>Independent Practice</h4>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-content">
-                                <span class="date">2021 – 2022</span>
-                                <h3>Social Counselor</h3>
-                                <h4>EG School</h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+            </div>
+            <div class="modern-divider">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path></svg>
             </div>
         </section>
 
@@ -301,9 +312,9 @@
         <section id="courses" class="courses section-padding alt-bg">
             <div class="container animate-on-scroll fade-up">
                 <div class="section-header">
-                    <h2>Online Courses</h2>
+                    <h2 id="courses-title">Online Courses</h2>
                     <div class="divider"></div>
-                    <p class="section-subtitle">Unlock your potential with specialized digital courses.</p>
+                    <p class="section-subtitle" id="courses-subtitle">Unlock your potential with specialized digital courses.</p>
                 </div>
 
                 <div class="courses-grid" id="home-courses-container">
@@ -412,28 +423,17 @@
                     <p class="section-subtitle arabic-text medium">مقالات للصحة النفسية وتطوير الذات</p>
                 </div>
                 <div class="grid-3" id="blog-posts-container">
-                    <!-- Sample Blog Post 1 -->
-                    <div class="glass-card blog-card" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
-                        <h3 class="arabic-text large" style="color: var(--primary);">كيف تتعامل مع نوبات القلق؟</h3>
-                        <p class="arabic-text medium" style="color: var(--muted); flex-grow: 1;">خطوات عملية مبنية على العلاج المعرفي السلوكي للتعامل مع نوبات الهلع والقلق المفاجئ...</p>
-                        <a href="blog.html#post1" class="btn-outline arabic-text medium" style="align-self: flex-start; padding: 0.5rem 1rem;">اقرأ المزيد</a>
-                    </div>
-                    <!-- Sample Blog Post 2 -->
-                    <div class="glass-card blog-card" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
-                        <h3 class="arabic-text large" style="color: var(--primary);">قوة التقبل (ACT)</h3>
-                        <p class="arabic-text medium" style="color: var(--muted); flex-grow: 1;">لماذا يعتبر تقبل المشاعر السلبية هو الخطوة الأولى للتعافي والصحة النفسية المستدامة...</p>
-                        <a href="blog.html#post2" class="btn-outline arabic-text medium" style="align-self: flex-start; padding: 0.5rem 1rem;">اقرأ المزيد</a>
-                    </div>
-                    <!-- Sample Blog Post 3 -->
-                    <div class="glass-card blog-card" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
-                        <h3 class="arabic-text large" style="color: var(--primary);">بناء حدود صحية</h3>
-                        <p class="arabic-text medium" style="color: var(--muted); flex-grow: 1;">كيف ترسم حدودك في العلاقات دون أن تشعر بالذنب، للحفاظ على طاقتك وسلامك الداخلي...</p>
-                        <a href="blog.html#post3" class="btn-outline arabic-text medium" style="align-self: flex-start; padding: 0.5rem 1rem;">اقرأ المزيد</a>
+                    <div class="loading-state text-center" style="grid-column: 1 / -1; padding: 4rem;">
+                        <i class="ph ph-spinner ph-spin" style="font-size: 3rem; color: var(--primary);"></i>
+                        <p class="medium" style="margin-top: 1rem; color: var(--muted);">Loading Posts...</p>
                     </div>
                 </div>
                 <div style="text-align: center; margin-top: 2rem;">
                     <a href="blog.html" class="btn-primary arabic-text medium">تصفح المدونة كاملة</a>
                 </div>
+            </div>
+            <div class="modern-divider">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path></svg>
             </div>
         </section>
 
@@ -441,9 +441,9 @@
         <section id="contact" class="contact section-padding alt-bg">
             <div class="container animate-on-scroll fade-up">
                 <div class="section-header center">
-                    <h2>Get In Touch</h2>
+                    <h2 id="contact-title">Get In Touch</h2>
                     <div class="divider mx-auto"></div>
-                    <p class="section-subtitle">Have an inquiry or want to send a message? Reach out below.</p>
+                    <p class="section-subtitle" id="contact-subtitle">Have an inquiry or want to send a message? Reach out below.</p>
                 </div>
                 <div class="contact-wrapper glass-card" style="max-width: 600px; margin: 0 auto; padding: 2rem;">
                     <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
@@ -602,7 +602,7 @@
     <!-- Floating Icons Logic Removed as per request -->
     
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/96560695570" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" style="position: fixed; bottom: 20px; left: 20px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; transition: transform 0.3s ease;">
+    <a href="https://wa.me/96560695570" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" style="position: fixed; bottom: 20px; left: 20px; background-color: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; transition: transform 0.3s ease;">
         <i class="ph ph-whatsapp-logo"></i>
     </a>
 

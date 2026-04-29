@@ -145,6 +145,27 @@ app.get('/api/testimonials', async (req, res) => {
     }
 });
 
+// Get all sections from Supabase
+app.get('/api/sections', async (req, res) => {
+    try {
+        const { data, error } = await supabase.from('sections').select('*').order('id', { ascending: true });
+
+        if (error || !data || data.length === 0) {
+            // Fallback to dummy data
+            return res.json([
+                { section_key: 'hero', title: 'Dr. Marwa Badr Ahmed', subtitle: 'Family, Marital & Educational Counselor | Psychological Trainer', content: 'Helping individuals understand themselves, build emotional resilience, and create healthier relationships through evidence-based psychological practices.', is_visible: true },
+                { section_key: 'about', title: 'About Me', subtitle: '', content: '<p>I am a Mental Health Specialist with several years of experience in psychological counseling, family and marital guidance, and self-development training. My work is rooted in a deep belief that awareness is the first step toward healing and transformation.</p><p>I specialize in <strong>Cognitive Behavioral Therapy (CBT)</strong>, <strong>Dialectical Behavior Therapy (DBT)</strong>, and <strong>Acceptance & Commitment Therapy (ACT)</strong>, using structured, evidence-based approaches to help individuals regulate emotions, overcome anxiety, and rebuild their sense of identity.</p><p>Through both one-on-one sessions and group programs, I aim to create meaningful, lasting impact in people’s lives by helping them develop clarity, emotional strength, and healthier behavioral patterns.</p>', is_visible: true },
+                { section_key: 'expertise', title: 'My Expertise', subtitle: '', content: '', is_visible: true },
+                { section_key: 'courses', title: 'Online Courses', subtitle: 'Unlock your potential with specialized digital courses.', content: '', is_visible: true },
+                { section_key: 'contact', title: 'Get In Touch', subtitle: 'Have an inquiry or want to send a message? Reach out below.', content: '', is_visible: true }
+            ]);
+        }
+        res.json(data);
+    } catch (err) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 // ==========================================
 // ADMIN ENDPOINTS
 // ==========================================
@@ -242,6 +263,27 @@ app.delete('/api/testimonials/:id', async (req, res) => {
     const { error } = await supabase.from('testimonials').delete().eq('id', id);
     if (error) return res.status(400).json({ error: error.message });
     res.json({ message: 'Testimonial deleted successfully' });
+});
+
+// --- SECTIONS ---
+app.put('/api/sections/:key', async (req, res) => {
+    const { key } = req.params;
+    const { title, subtitle, content, is_visible } = req.body;
+    
+    // Check if it exists
+    const { data: existing, error: checkError } = await supabase.from('sections').select('*').eq('section_key', key).single();
+    
+    let error;
+    if (!existing) {
+        const { error: insertError } = await supabase.from('sections').insert([{ section_key: key, title, subtitle, content, is_visible }]);
+        error = insertError;
+    } else {
+        const { error: updateError } = await supabase.from('sections').update({ title, subtitle, content, is_visible }).eq('section_key', key);
+        error = updateError;
+    }
+    
+    if (error) return res.status(400).json({ error: error.message });
+    res.json({ message: 'Section updated successfully' });
 });
 
 // Fallback route to serve index.html for SPA-like behavior or if page not found
