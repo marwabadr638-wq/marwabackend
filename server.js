@@ -116,7 +116,7 @@ app.get('/api/courses', async (req, res) => {
         if (error || !data || data.length === 0) {
             // Fallback to dummy data
             return res.json([
-                { id: 1, title: 'Tri-Therapy Bundle <br><small class="arabic-text medium">(باقة العلاج الثلاثي)</small>', price: 299.99, original_price: 400.00, discount_badge: 'Save 25%', image_url: 'images/course-tri-therapy.png', is_bundle: true, duration: '15 Days', excerpt: 'Complete mastery of evidence-based therapies. Includes full access to DBT, CBT, and ACT courses.' },
+                { id: 1, title: 'Tri-Therapy Bundle <br><small class="arabic-text medium">(باقة العلاج الثلاثي)</small>', price: 299.99, original_price: 400.00, discount_badge: 'Save 25%', image_url: 'images/course-tri-therapy.png', is_bundle: true, duration: '15 Days', excerpt: 'Complete mastery of evidence-based therapies for mental health professionals. Includes full access to DBT, CBT, and ACT clinical training.' },
                 { id: 6, title: 'Healing Journey Program <br><small class="arabic-text medium">(رحلة تعافي)</small>', price: 74.99, original_price: 150.00, discount_badge: 'Save 50%', image_url: 'images/course-healing-journey.png', is_bundle: false, duration: '2 Days', excerpt: 'A comprehensive program designed to help you process trauma and build emotional resilience.' }
             ]);
         }
@@ -134,9 +134,9 @@ app.get('/api/testimonials', async (req, res) => {
 
         if (error || !data || data.length === 0) {
             return res.json([
-                { id: 1, rating: 5, quote: "The CBT course completely changed how I handle my anxiety.", author: "Sarah M." },
-                { id: 2, rating: 5, quote: "I took the Tri-Therapy bundle. Best investment ever.", author: "Ahmed K." },
-                { id: 3, rating: 5, quote: "Dr. Marwa has a way of explaining complex concepts simply.", author: "Laila T." }
+                { id: 1, rating: 5, quote: "The CBT training provided me with invaluable clinical tools for my practice.", author: "Sarah M., Clinical Psychologist" },
+                { id: 2, rating: 5, quote: "I took the Tri-Therapy bundle. Best investment ever for my career.", author: "Ahmed K." },
+                { id: 3, rating: 5, quote: "Dr. Marwa has a way of explaining complex psychological concepts simply.", author: "Laila T." }
             ]);
         }
         res.json(data);
@@ -153,11 +153,11 @@ app.get('/api/sections', async (req, res) => {
         if (error || !data || data.length === 0) {
             // Fallback to dummy data
             return res.json([
-                { section_key: 'hero', title: 'Dr. Marwa Badr Ahmed', subtitle: 'Family, Marital & Educational Counselor | Psychological Trainer', content: 'Helping individuals understand themselves, build emotional resilience, and create healthier relationships through evidence-based psychological practices.', is_visible: true },
-                { section_key: 'about', title: 'About Me', subtitle: '', content: '<p>I am a Mental Health Specialist with several years of experience in psychological counseling, family and marital guidance, and self-development training. My work is rooted in a deep belief that awareness is the first step toward healing and transformation.</p><p>I specialize in <strong>Cognitive Behavioral Therapy (CBT)</strong>, <strong>Dialectical Behavior Therapy (DBT)</strong>, and <strong>Acceptance & Commitment Therapy (ACT)</strong>, using structured, evidence-based approaches to help individuals regulate emotions, overcome anxiety, and rebuild their sense of identity.</p><p>Through both one-on-one sessions and group programs, I aim to create meaningful, lasting impact in people’s lives by helping them develop clarity, emotional strength, and healthier behavioral patterns.</p>', is_visible: true },
+                { section_key: 'hero', title: 'Dr. Marwa Badr Ahmed', subtitle: 'Consultant & Trainer for Mental Health Professionals', content: 'Empowering psychologists and mental health professionals with advanced evidence-based practices (CBT, DBT, ACT) to elevate their clinical skills and therapeutic impact.', is_visible: true },
+                { section_key: 'about', title: 'About Me', subtitle: '', content: '<p>I am a Mental Health Specialist and Trainer dedicated to elevating the standards of psychological practice. With extensive experience in clinical supervision and professional training, my mission is to equip psychologists with practical, evidence-based tools.</p><p>I specialize in training professionals in <strong>Cognitive Behavioral Therapy (CBT)</strong>, <strong>Dialectical Behavior Therapy (DBT)</strong>, and <strong>Acceptance & Commitment Therapy (ACT)</strong>. My programs focus on case formulation, advanced therapeutic techniques, and managing complex clinical cases.</p><p>Whether you are a newly graduated psychologist or an experienced practitioner, my courses and supervision sessions are designed to build your clinical confidence and enhance your therapeutic effectiveness.</p>', is_visible: true },
                 { section_key: 'expertise', title: 'My Expertise', subtitle: '', content: '', is_visible: true },
-                { section_key: 'courses', title: 'Online Courses', subtitle: 'Unlock your potential with specialized digital courses.', content: '', is_visible: true },
-                { section_key: 'contact', title: 'Get In Touch', subtitle: 'Have an inquiry or want to send a message? Reach out below.', content: '', is_visible: true }
+                { section_key: 'courses', title: 'Professional Training Courses', subtitle: 'Advanced training programs designed specifically for mental health professionals.', content: '', is_visible: true },
+                { section_key: 'contact', title: 'Get In Touch', subtitle: 'Have an inquiry regarding training or clinical supervision? Reach out below.', content: '', is_visible: true }
             ]);
         }
         res.json(data);
@@ -284,6 +284,151 @@ app.put('/api/sections/:key', async (req, res) => {
     
     if (error) return res.status(400).json({ error: error.message });
     res.json({ message: 'Section updated successfully' });
+});
+
+// ==========================================
+// PAYMENT & ACCESS ENDPOINTS
+// ==========================================
+
+// Helper: extract and verify user JWT from Authorization header
+async function getUserFromRequest(req) {
+    const authHeader = req.headers.authorization || '';
+    const token = authHeader.replace('Bearer ', '').trim();
+    if (!token) return null;
+
+    const { data: { user }, error } = await supabase.auth.getUser(token);
+    if (error || !user) return null;
+    return user;
+}
+
+// POST /api/record-purchase
+// Called by frontend after payment gateway confirms payment.
+// Saves purchase record to Supabase purchases table.
+app.post('/api/record-purchase', async (req, res) => {
+    try {
+        // 1. Verify user identity from JWT
+        const user = await getUserFromRequest(req);
+        if (!user) {
+            return res.status(401).json({ error: 'Unauthorized — please log in' });
+        }
+
+        const { course_id, transaction_id, amount_paid, currency } = req.body;
+
+        // 2. Validate required fields
+        if (!course_id || !transaction_id || !amount_paid) {
+            return res.status(400).json({ error: 'Missing required fields: course_id, transaction_id, amount_paid' });
+        }
+
+        // 3. Prevent duplicate purchases (idempotent)
+        const { data: existing } = await supabase
+            .from('purchases')
+            .select('id')
+            .eq('transaction_id', transaction_id)
+            .single();
+
+        if (existing) {
+            return res.status(200).json({ message: 'Purchase already recorded', already_exists: true });
+        }
+
+        // 4. Insert purchase record
+        const { data, error } = await supabase
+            .from('purchases')
+            .insert([{
+                user_id: user.id,
+                course_id: course_id,
+                transaction_id: transaction_id,
+                amount_paid: amount_paid,
+                currency: currency || 'USD',
+                purchased_at: new Date().toISOString(),
+                is_active: true
+            }]);
+
+        if (error) {
+            console.error('[API] record-purchase DB error:', error);
+            return res.status(500).json({ error: 'Failed to record purchase' });
+        }
+
+        console.log(`[API] ✅ Purchase recorded: user=${user.id} course=${course_id} txn=${transaction_id}`);
+        res.status(201).json({ message: 'Purchase recorded successfully', data });
+
+    } catch (err) {
+        console.error('[API] record-purchase exception:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// GET /api/check-access?course_id=cbt-course
+// Called by course content pages on load to verify access.
+// Returns { has_access: true/false }
+app.get('/api/check-access', async (req, res) => {
+    try {
+        // 1. Verify user identity
+        const user = await getUserFromRequest(req);
+        if (!user) {
+            return res.status(200).json({ has_access: false, reason: 'not_logged_in' });
+        }
+
+        const { course_id } = req.query;
+        if (!course_id) {
+            return res.status(400).json({ error: 'Missing course_id query parameter' });
+        }
+
+        // 2. Check purchases table
+        const { data, error } = await supabase
+            .from('purchases')
+            .select('id')
+            .eq('user_id', user.id)
+            .eq('course_id', course_id)
+            .eq('is_active', true)
+            .single();
+
+        if (error || !data) {
+            return res.status(200).json({ has_access: false, reason: 'not_purchased' });
+        }
+
+        res.status(200).json({ has_access: true });
+
+    } catch (err) {
+        console.error('[API] check-access exception:', err);
+        res.status(500).json({ has_access: false, error: 'Internal server error' });
+    }
+});
+
+// GET /api/my-courses — returns all purchases for authenticated user
+app.get('/api/my-courses', async (req, res) => {
+    try {
+        const user = await getUserFromRequest(req);
+        if (!user) return res.status(401).json({ error: 'Unauthorized' });
+
+        const { data, error } = await supabase
+            .from('purchases')
+            .select('course_id, purchased_at, amount_paid, currency, transaction_id')
+            .eq('user_id', user.id)
+            .eq('is_active', true)
+            .order('purchased_at', { ascending: false });
+
+        if (error) return res.status(500).json({ error: error.message });
+        res.json(data || []);
+    } catch (err) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// POST /api/auth/forgot-password — sends Supabase password reset email
+app.post('/api/auth/forgot-password', async (req, res) => {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ error: 'Email is required' });
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://drmarwabadr.drmarwa.workers.dev/reset-password.html'
+    });
+
+    // Always respond with success — never reveal whether email exists (security)
+    if (error && !error.message.includes('not found')) {
+        return res.status(400).json({ error: error.message });
+    }
+
+    res.json({ message: 'If this email is registered, a password reset link has been sent.' });
 });
 
 // Fallback route to serve index.html for SPA-like behavior or if page not found
