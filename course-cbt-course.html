@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
@@ -105,9 +105,9 @@
                 <span class="meta-chip"><i class="ph ph-certificate"></i> Certificate</span>
             </div>
 
-            <div class="video-box">
-                <button class="play-btn" onclick="alert('Add your video embed URL for this module')"><i class="ph ph-play"></i></button>
-                <p id="vid-label">Click to play</p>
+            <div class="video-box" id="video-container">
+                <!-- Video loaded dynamically by loadModule() -->
+                <p style="color:var(--muted);font-size:0.85rem;z-index:1;">Loading video...</p>
             </div>
 
             <h2 class="section-h2"><i class="ph ph-book-open"></i> About This Module</h2>
@@ -133,31 +133,58 @@
         'm1': {
             title: 'Introduction to CBT',
             duration: '40 min',
+            videoUrl: '', // ← ضع YouTube embed URL هنا مثال: https://www.youtube.com/embed/XXXXXXXXX
             body: 'CBT is one of the most well-researched approaches in modern psychology. This module covers the history, the cognitive model (thoughts → feelings → behavior), and the typical structure of a CBT session from intake to termination.'
-        },        'm2': {
+        },
+        'm2': {
             title: 'Identifying Cognitive Distortions',
             duration: '45 min',
+            videoUrl: '', // ← ضع YouTube embed URL هنا
             body: 'Learn the 15 most common cognitive distortions including catastrophizing, all-or-nothing thinking, mind reading, and fortune telling. You\'ll practice identifying these in client transcripts using the Socratic questioning method.'
-        },        'm3': {
+        },
+        'm3': {
             title: 'Challenging Negative Thoughts',
             duration: '48 min',
+            videoUrl: '', // ← ضع YouTube embed URL هنا
             body: 'Cognitive restructuring is the heart of CBT. This module walks through thought records, examining evidence for and against beliefs, generating balanced alternatives, and building behavioral experiments to test distorted thoughts.'
-        },        'm4': {
+        },
+        'm4': {
             title: 'Behavioral Activation',
             duration: '38 min',
+            videoUrl: '', // ← ضع YouTube embed URL هنا
             body: 'Behavioral activation breaks the depression-inactivity cycle. You\'ll learn activity scheduling, mastery and pleasure rating on a 0-10 scale, graded task assignment, and how to overcome avoidance patterns in depressed clients.'
-        },        'm5': {
+        },
+        'm5': {
             title: 'Problem Solving & Relapse Prevention',
             duration: '42 min',
+            videoUrl: '', // ← ضع YouTube embed URL هنا
             body: 'Equip clients with a structured problem-solving model and a personalized relapse prevention plan. This module covers identifying early warning signs, coping strategies, and building a support network for long-term maintenance.'
-        },        'm6': {
+        },
+        'm6': {
             title: 'Final Assessment & Certification',
             duration: '20 min',
+            videoUrl: '', // ← ضع YouTube embed URL هنا
             body: 'Complete the final CBT assessment. This module also includes a brief comparative reflection between CBT and other evidence-based approaches. Pass with 70% or above to receive your certificate.'
         }
     };
     const KEYS = Object.keys(MODULES);
     let current = 0;
+
+    function renderVideo(videoUrl, title) {
+        const container = document.getElementById('video-container');
+        if (!container) return;
+        if (videoUrl) {
+            container.innerHTML = `<iframe src="${videoUrl}" title="${title}" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen style="width:100%;height:100%;border-radius:var(--border-radius);"></iframe>`;
+        } else {
+            container.innerHTML = `
+                <div style="text-align:center;z-index:1;">
+                    <i class="ph ph-video-camera-slash" style="font-size:2.5rem;color:var(--muted);"></i>
+                    <p style="color:var(--muted);margin:0.5rem 0 0;font-size:0.85rem;">Video coming soon</p>
+                </div>`;
+        }
+    }
 
     function loadModule(keyOrIndex) {
         const idx = typeof keyOrIndex === 'number' ? keyOrIndex : KEYS.indexOf(keyOrIndex);
@@ -168,7 +195,7 @@
         document.getElementById('mod-title').textContent = m.title;
         document.getElementById('mod-duration').textContent = m.duration;
         document.getElementById('mod-body').textContent = m.body;
-        document.getElementById('vid-label').textContent = m.title + ' — Click to play';
+        renderVideo(m.videoUrl, m.title);
 
         // Sidebar
         document.querySelectorAll('.module-list li').forEach((li, i) => li.classList.toggle('active', i === idx));

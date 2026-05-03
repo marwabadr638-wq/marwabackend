@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env node
+#!/usr/bin/env node
 /**
  * dist-watcher.js
  * Watches for file changes and auto-rebuilds the dist/ folder.
@@ -16,7 +16,8 @@ const HTML_FILES = [
     'my-courses.html','reset-password.html','privacy-policy.html',
     'course-act-course.html','course-cbt-course.html','course-dbt-course.html',
     'course-healing-journey-program.html','course-personality-disorders-course.html',
-    'gammal-tech.html','terms.html','course-tri-therapy-bundle.html','refund-policy.html'
+    'gammal-tech.html','terms.html','course-tri-therapy-bundle.html','refund-policy.html',
+    'payment-success.html'
 ];
 
 const WATCH_DIRS  = ['css', 'js', 'images', 'fonts'];

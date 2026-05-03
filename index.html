@@ -658,6 +658,31 @@
                 </form>
             </div>
 
+            <!-- ── View: OTP Verification ── -->
+            <div id="auth-view-otp" style="display:none;">
+                <div style="text-align:center;margin-bottom:1.75rem;">
+                    <div style="width:56px;height:56px;background:rgba(20,184,166,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+                        <i class="ph ph-envelope-open" style="font-size:1.6rem;color:var(--primary);"></i>
+                    </div>
+                    <h3 style="margin:0 0 0.5rem;">Check Your Email</h3>
+                    <p style="color:var(--muted);font-size:0.85rem;margin:0;line-height:1.5;">We sent a confirmation link to<br><strong id="otp-email-display" style="color:var(--text);"></strong></p>
+                </div>
+                <div id="otp-message-area"></div>
+                <div style="background:rgba(20,184,166,0.08);border:1px solid var(--primary);border-radius:10px;padding:1.25rem;text-align:center;margin-bottom:1rem;">
+                    <i class="ph ph-envelope-open" style="font-size:2rem;color:var(--primary);display:block;margin-bottom:0.5rem;"></i>
+                    <strong style="color:var(--primary);">Confirmation Email Sent!</strong>
+                    <p style="margin:0.5rem 0 0;font-size:0.85rem;color:var(--muted);line-height:1.5;">
+                        Click the link in your email to activate your account,<br>then come back and <strong>Log In</strong>.
+                    </p>
+                </div>
+                <button onclick="switchAuthView('login')" class="btn-primary" style="width:100%;">
+                    <i class="ph ph-sign-in"></i> Go to Login
+                </button>
+                <p style="text-align:center;font-size:0.78rem;color:var(--muted);margin-top:0.75rem;">
+                    Didn't receive it? Check spam folder.
+                </p>
+            </div>
+
         </div>
     </div>
 
@@ -671,34 +696,6 @@
             <a href="checkout.html" id="proceed-checkout-btn" class="btn-primary"
                 style="width: 100%; display: block; text-align: center; margin-top: 1rem;">Proceed to Checkout
                 (Visa)</a>
-            <!-- ── View: OTP Verification ── -->
-            <div id="auth-view-otp" style="display:none;">
-                <div style="text-align:center;margin-bottom:1.75rem;">
-                    <div style="width:56px;height:56px;background:rgba(20,184,166,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
-                        <i class="ph ph-envelope-open" style="font-size:1.6rem;color:var(--primary);"></i>
-                    </div>
-                    <h3 style="margin:0 0 0.5rem;">Check Your Email</h3>
-                    <p style="color:var(--muted);font-size:0.85rem;margin:0;line-height:1.5;">We sent a 6-digit verification code to<br><strong id="otp-email-display" style="color:var(--text);"></strong></p>
-                </div>
-                <div id="otp-message-area"></div>
-                <form class="subscription-form" id="otp-form" onsubmit="event.preventDefault(); window.verifyOtp();">
-                    <div style="display:flex;gap:0.5rem;justify-content:center;margin-bottom:1rem;">
-                        <input type="text" id="otp-input"
-                            placeholder="Enter 6-digit code"
-                            maxlength="6"
-                            inputmode="numeric"
-                            pattern="[0-9]*"
-                            style="text-align:center;font-size:1.5rem;font-weight:700;letter-spacing:0.3em;padding:0.75rem;width:100%;border-radius:8px;"
-                            required>
-                    </div>
-                    <button type="submit" class="btn-primary" style="width:100%;" id="otp-submit-btn">
-                        <i class="ph ph-check-circle"></i> Verify & Complete Registration
-                    </button>
-                </form>
-                <button onclick="switchAuthView('login')" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.82rem;margin-top:1rem;display:block;width:100%;text-align:center;font-family:inherit;">
-                    Didn't receive it? Check spam or <span style="color:var(--primary);text-decoration:underline;" onclick="switchAuthView('login')">try again</span>
-                </button>
-            </div>
 
         </div>
     </div>
