@@ -48,12 +48,12 @@ CREATE TABLE public.testimonials (
 -- ==========================================
 INSERT INTO public.courses (id, title, price, original_price, discount_badge, image_url, is_bundle, duration, excerpt)
 VALUES 
-(6, 'Tri-Therapy Bundle <br><small class="arabic-text medium">(باقة العلاج الثلاثي)</small>', 299.99, 400.00, 'Save 25%', 'images/course-tri-therapy.png', true, '15 Days', 'Complete mastery of evidence-based therapies. Includes full access to DBT, CBT, and ACT courses.'),
-(1, 'Healing Journey Program <br><small class="arabic-text medium">(رحلة تعافي)</small>', 74.99, 150.00, 'Save 50%', 'images/course-healing-journey.png', false, '2 Days', 'A comprehensive program designed to help you process trauma and build emotional resilience.'),
-(2, 'CBT Course <br><small class="arabic-text medium">(العلاج المعرفي السلوكي)</small>', 119.99, 200.00, 'Save 40%', 'images/course-cbt.png', false, '5 Days', 'Learn Cognitive Behavioral Therapy techniques to reframe negative thought patterns.'),
-(3, 'DBT Course <br><small class="arabic-text medium">(العلاج الجدلي السلوكي)</small>', 149.99, 250.00, 'Save 40%', 'images/course-dbt.png', false, '5 Days', 'Master Dialectical Behavior Therapy skills for mindfulness and emotional regulation.'),
-(4, 'Personality Disorders Course <br><small class="arabic-text medium">(اضطرابات الشخصية)</small>', 149.99, 220.00, 'Save 32%', 'images/course-personality-disorders.png', false, '5 Days', 'An in-depth understanding of personality disorders and effective coping mechanisms.'),
-(5, 'ACT Course <br><small class="arabic-text medium">(العلاج بالقبول والالتزام)</small>', 129.99, 200.00, 'Save 35%', 'images/course-act.png', false, '5 Days', 'Acceptance & Commitment Therapy principles for living a value-driven life.');
+(6, 'Tri-Therapy Bundle <br><small class="arabic-text medium">(باقة العلاج الثلاثي)</small>', 349.99, 425.00, 'Save 18%', 'images/course-tri-therapy.png', true, '15 Days', 'Complete mastery of evidence-based therapies. Includes full access to DBT, CBT, and ACT courses.'),
+(1, 'Healing Journey Program <br><small class="arabic-text medium">(رحلة تعافي)</small>', 99.99, 150.00, 'Save 33%', 'images/course-healing-journey.png', false, '2 Days', 'A comprehensive program designed to help you process trauma and build emotional resilience.'),
+(2, 'CBT Course <br><small class="arabic-text medium">(العلاج المعرفي السلوكي)</small>', 149.99, 200.00, 'Save 25%', 'images/course-cbt.png', false, '5 Days', 'Learn Cognitive Behavioral Therapy techniques to reframe negative thought patterns.'),
+(3, 'DBT Course <br><small class="arabic-text medium">(العلاج الجدلي السلوكي)</small>', 174.99, 225.00, 'Save 22%', 'images/course-dbt.png', false, '5 Days', 'Master Dialectical Behavior Therapy skills for mindfulness and emotional regulation.'),
+(4, 'Personality Disorders Course <br><small class="arabic-text medium">(اضطرابات الشخصية)</small>', 174.99, 225.00, 'Save 22%', 'images/course-personality-disorders.png', false, '5 Days', 'An in-depth understanding of personality disorders and effective coping mechanisms.'),
+(5, 'ACT Course <br><small class="arabic-text medium">(العلاج بالقبول والالتزام)</small>', 149.99, 200.00, 'Save 25%', 'images/course-act.png', false, '5 Days', 'Acceptance & Commitment Therapy principles for living a value-driven life.');
 
 -- ==========================================
 -- 5. Insert Default Blog Posts

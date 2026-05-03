@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "watch": "node dist-watcher.js",
+    "build": "node -e \"require('./dist-watcher.js')\" & exit 0"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.104.1",

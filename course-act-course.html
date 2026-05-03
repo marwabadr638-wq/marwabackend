@@ -1,82 +1,70 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course Content | Dr. Marwa Badr</title>
+    <title>Acceptance & Commitment Therapy (ACT) | Dr. Marwa Badr</title>
+    <meta name="robots" content="noindex, nofollow">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .content-layout {
-            display: flex;
-            min-height: calc(100vh - var(--nav-height));
-            margin-top: var(--nav-height);
-        }
-        .sidebar {
-            width: 300px;
-            background: var(--alt-bg);
-            border-right: 1px solid var(--border);
-            padding: 2rem 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .main-content {
-            flex: 1;
-            padding: 2rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .module-list { list-style: none; padding: 0; }
-        .module-list li {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
-            cursor: pointer;
-            transition: background 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .module-list li:hover { background: var(--bg); }
-        .module-list li.active { border-left: 3px solid var(--primary); background: var(--bg); }
-        
-        .video-container {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000;
-            border-radius: var(--border-radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-        .video-container i { font-size: 5rem; color: #fff; opacity: 0.8; }
-        .materials-box {
-            background: var(--alt-bg);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--border);
-            margin-top: 2rem;
-        }
-        .materials-box a { color: var(--primary); display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;}
-        .materials-box a:hover { text-decoration: underline; }
+        body{margin:0;}
+        /* Theme toggle icons */
+        [data-theme="dark"]  #theme-icon-light { display: none; }
+        [data-theme="dark"]  #theme-icon-dark  { display: inline; }
+        [data-theme="light"] #theme-icon-light { display: inline; }
+        [data-theme="light"] #theme-icon-dark  { display: none; }
 
-        @media (max-width: 768px) {
-            .content-layout { flex-direction: column; }
-            .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
-        }
+        .content-layout{display:flex;min-height:calc(100vh - var(--nav-height));margin-top:var(--nav-height);}
+        .sidebar{width:290px;flex-shrink:0;background:var(--alt-bg);border-right:1px solid var(--border);padding:0;height:calc(100vh - var(--nav-height));position:sticky;top:var(--nav-height);overflow-y:auto;}
+        .sidebar-header{padding:1.25rem;border-bottom:1px solid var(--border);}
+        .sidebar-header h3{font-size:0.9rem;margin:0 0 0.25rem;}
+        .sidebar-header p{font-size:0.75rem;color:var(--muted);margin:0;}
+        .prog-bar{height:4px;background:var(--border);border-radius:2px;margin-top:0.75rem;overflow:hidden;}
+        .prog-fill{height:100%;background:var(--primary);border-radius:2px;transition:width 0.4s;width:0%;}
+        .prog-text{font-size:0.72rem;color:var(--muted);margin-top:0.35rem;}
+        .module-list{list-style:none;padding:0.5rem 0;margin:0;}
+        .module-list li{padding:0.75rem 1.25rem;display:flex;align-items:center;gap:0.6rem;cursor:pointer;font-size:0.865rem;transition:background 0.15s,color 0.15s;border-left:3px solid transparent;}
+        .module-list li:hover{background:rgba(20,184,166,0.06);}
+        .module-list li.active{border-left-color:var(--primary);background:rgba(20,184,166,0.1);color:var(--primary);font-weight:600;}
+        .module-list li i{font-size:1rem;color:var(--muted);flex-shrink:0;}
+        .module-list li.active i{color:var(--primary);}
+        .main-content{flex:1;padding:2.5rem;max-width:860px;}
+        .course-badge{display:inline-flex;align-items:center;gap:0.3rem;background:rgba(20,184,166,0.12);color:#14b8a6;padding:0.25rem 0.75rem;border-radius:20px;font-size:0.75rem;font-weight:700;margin-bottom:1rem;}
+        .video-box{width:100%;aspect-ratio:16/9;background:#080d1a;border-radius:var(--border-radius);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:2rem;position:relative;overflow:hidden;}
+        .video-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(20,184,166,0.12) 0%,transparent 70%);}
+        .play-btn{width:60px;height:60px;border-radius:50%;background:var(--primary);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#0f172a;transition:transform 0.2s,box-shadow 0.2s;z-index:1;}
+        .play-btn:hover{transform:scale(1.1);box-shadow:0 0 28px rgba(20,184,166,0.5);}
+        .video-box p{color:var(--muted);font-size:0.82rem;margin-top:0.75rem;z-index:1;}
+        .meta-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+        .meta-chip{display:inline-flex;align-items:center;gap:0.4rem;background:var(--alt-bg);border:1px solid var(--border);border-radius:8px;padding:0.4rem 0.8rem;font-size:0.8rem;color:var(--muted);}
+        .meta-chip i{color:var(--primary);}
+        .section-h2{font-size:1.05rem;margin:1.75rem 0 0.75rem;display:flex;align-items:center;gap:0.5rem;}
+        .section-h2 i{color:var(--primary);}
+        .body-text{color:var(--muted);line-height:1.8;font-size:0.93rem;}
+        .materials{background:var(--alt-bg);border:1px solid var(--border);border-radius:10px;padding:1.25rem;margin-top:1.5rem;}
+        .materials h3{font-size:0.9rem;margin:0 0 1rem;display:flex;align-items:center;gap:0.4rem;}
+        .materials h3 i{color:var(--primary);}
+        .mat-link{display:flex;align-items:center;gap:0.6rem;padding:0.55rem 0.75rem;border-radius:8px;text-decoration:none;color:var(--text);font-size:0.85rem;transition:background 0.15s;margin-bottom:0.2rem;}
+        .mat-link:hover{background:rgba(20,184,166,0.08);color:var(--primary);}
+        .mat-link i{color:var(--primary);font-size:1rem;}
+        .nav-btns{display:flex;justify-content:space-between;margin-top:2.5rem;gap:1rem;}
+        .nav-btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.25rem;border-radius:8px;border:1px solid var(--border);background:var(--alt-bg);color:var(--text);cursor:pointer;font-size:0.875rem;font-family:inherit;transition:all 0.2s;}
+        .nav-btn:hover:not(:disabled){border-color:var(--primary);color:var(--primary);}
+        .nav-btn:disabled{opacity:0.4;cursor:not-allowed;}
+        .nav-btn.primary{background:var(--primary);color:#0f172a;border-color:var(--primary);font-weight:600;}
+        .nav-btn.primary:hover:not(:disabled){background:var(--primary-hover);}
+        @media(max-width:768px){.content-layout{flex-direction:column;}.sidebar{width:100%;height:auto;position:static;}}
+        @keyframes spin{to{transform:rotate(360deg)}}
     </style>
 </head>
 <body>
-
-    <!-- Simple Nav -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo"><i class="ph ph-arrow-left"></i> Back to Home</a>
-            <div class="nav-actions">
-                <span id="user-welcome" style="margin-right: 1rem; font-weight: 500;"></span>
+            <a href="my-courses.html" class="logo" style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;"><i class="ph ph-arrow-left"></i> My Courses</a>
+            <div style="display:flex;align-items:center;gap:1rem;">
+                <span id="user-welcome" style="font-size:0.82rem;color:var(--muted);"></span>
                 <button id="theme-toggle" aria-label="Toggle Theme">
                     <i class="ph ph-sun" id="theme-icon-light"></i>
                     <i class="ph ph-moon" id="theme-icon-dark"></i>
@@ -85,79 +73,159 @@
         </div>
     </nav>
 
-    <div class="content-layout">
-        <!-- Sidebar -->
+    <div id="access-loader" style="position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;">
+        <div style="width:48px;height:48px;border:3px solid var(--border);border-top-color:var(--primary);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+        <p style="color:var(--muted);font-size:0.9rem;">Verifying access...</p>
+    </div>
+
+    <div class="content-layout" id="page-content" style="display:none;">
         <aside class="sidebar">
-            <h3>Course Curriculum</h3>
-            <ul class="module-list">
-                <li class="active"><i class="ph ph-play-circle"></i> Module 1: Introduction</li>
-                <li><i class="ph ph-play-circle"></i> Module 2: Understanding Roots</li>
-                <li><i class="ph ph-play-circle"></i> Module 3: Emotional Regulation</li>
-                <li><i class="ph ph-play-circle"></i> Module 4: Practical Techniques</li>
-                <li><i class="ph ph-certificate"></i> Final Assessment</li>
+            <div class="sidebar-header">
+                <h3>Acceptance & Commitment Therapy (ACT)</h3>
+                <p>6 modules · Certificate included</p>
+                <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+                <p class="prog-text" id="prog-text">0 of 6 completed</p>
+            </div>
+            <ul class="module-list" id="module-list">
+                <li class="active" onclick="loadModule('m1')"><i class="ph ph-play-circle"></i> Introduction to ACT</li>
+                <li onclick="loadModule('m2')"><i class="ph ph-play-circle"></i> Acceptance & Defusion</li>
+                <li onclick="loadModule('m3')"><i class="ph ph-play-circle"></i> Present Moment & Self-as-Context</li>
+                <li onclick="loadModule('m4')"><i class="ph ph-play-circle"></i> Values Clarification</li>
+                <li onclick="loadModule('m5')"><i class="ph ph-play-circle"></i> Committed Action</li>
+                <li onclick="loadModule('m6')"><i class="ph ph-certificate"></i> Final Assessment & Certification</li>
             </ul>
         </aside>
 
-        <!-- Main Content Area -->
         <main class="main-content">
-            <span class="course-badge" style="background: rgba(20,184,166,0.1); color: var(--primary); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">Healing Journey Program</span>
-            <h1 style="margin-top: 1rem; margin-bottom: 2rem;">Module 1: Introduction</h1>
-            
-            <div class="video-container">
-                <!-- Replace with iframe of YouTube or Vimeo video -->
-                <i class="ph ph-play"></i>
-                <p style="position: absolute; bottom: 10px; color: #ccc;">Video Placeholder</p>
+            <span class="course-badge"><i class="ph ph-graduation-cap"></i> ACT</span>
+            <h1 id="mod-title" style="margin:0.4rem 0 1rem;font-size:1.55rem;"></h1>
+            <div class="meta-row">
+                <span class="meta-chip"><i class="ph ph-clock"></i> <span id="mod-duration"></span></span>
+                <span class="meta-chip"><i class="ph ph-translate"></i> Arabic</span>
+                <span class="meta-chip"><i class="ph ph-certificate"></i> Certificate</span>
             </div>
 
-            <div class="content-text">
-                <h2>Welcome to the Healing Journey</h2>
-                <p style="color: var(--muted); margin-top: 1rem;">
-                    In this first module, we will explore the foundational concepts of trauma and emotional resilience. Make sure to download the workbook below before proceeding to the next video.
-                </p>
+            <div class="video-box">
+                <button class="play-btn" onclick="alert('Add your video embed URL for this module')"><i class="ph ph-play"></i></button>
+                <p id="vid-label">Click to play</p>
             </div>
 
-            <div class="materials-box">
-                <h3><i class="ph ph-folder"></i> Course Materials</h3>
-                <a href="#"><i class="ph ph-file-pdf"></i> Module 1 Workbook.pdf</a>
-                <a href="#"><i class="ph ph-file-text"></i> Reflection Exercise.docx</a>
+            <h2 class="section-h2"><i class="ph ph-book-open"></i> About This Module</h2>
+            <p class="body-text" id="mod-body"></p>
+
+            <div class="materials">
+                <h3><i class="ph ph-folder-open"></i> Downloadable Materials</h3>
+                <a href="#" class="mat-link"><i class="ph ph-file-pdf"></i> Module Workbook.pdf</a>
+                <a href="#" class="mat-link"><i class="ph ph-file-text"></i> Reflection Exercise.pdf</a>
+                <a href="#" class="mat-link"><i class="ph ph-file-pdf"></i> Clinical Reference Sheet.pdf</a>
+            </div>
+
+            <div class="nav-btns">
+                <button class="nav-btn" id="btn-prev" onclick="prevMod()" disabled><i class="ph ph-arrow-left"></i> Previous</button>
+                <button class="nav-btn primary" id="btn-next" onclick="nextMod()">Next Module <i class="ph ph-arrow-right"></i></button>
             </div>
         </main>
     </div>
 
+    <script src="js/payment-service.js"></script>
     <script>
-        // Basic Security Check & User Display
+    const MODULES = {
+        'm1': {
+            title: 'Introduction to ACT',
+            duration: '42 min',
+            body: 'ACT is a third-wave behavioral therapy grounded in Relational Frame Theory (RFT). This module introduces the hexaflex model and its six core processes: acceptance, defusion, present moment, self-as-context, values, and committed action.'
+        },        'm2': {
+            title: 'Acceptance & Defusion',
+            duration: '40 min',
+            body: 'Learn to help clients step back from unhelpful thoughts (defusion) and embrace difficult emotions without struggle (acceptance). Explore creative hopelessness, the control as the problem concept, and practical defusion metaphors.'
+        },        'm3': {
+            title: 'Present Moment & Self-as-Context',
+            duration: '38 min',
+            body: 'The observer self is a powerful ACT concept. This module teaches mindfulness from an ACT perspective, distinguishing conceptualized self from self-as-context, and using the chessboard and sky metaphors effectively.'
+        },        'm4': {
+            title: 'Values Clarification',
+            duration: '35 min',
+            body: 'Values are the direction, not the destination. You\'ll learn the bull\'s eye technique, the tombstone exercise, values clarification worksheets, and how to differentiate genuine values from socially imposed rules.'
+        },        'm5': {
+            title: 'Committed Action',
+            duration: '40 min',
+            body: 'Committed action involves setting SMART goals guided by values and building larger patterns of effective behavior. This module covers goal setting, obstacles, willingness, and using the \'if not now, when?\' technique.'
+        },        'm6': {
+            title: 'Final Assessment & Certification',
+            duration: '20 min',
+            body: 'Complete the final ACT assessment covering all six hexaflex processes. A score of 70% or above grants your ACT Certificate of Completion from Dr. Marwa Badr\'s platform.'
+        }
+    };
+    const KEYS = Object.keys(MODULES);
+    let current = 0;
+
+    function loadModule(keyOrIndex) {
+        const idx = typeof keyOrIndex === 'number' ? keyOrIndex : KEYS.indexOf(keyOrIndex);
+        if (idx < 0 || idx >= KEYS.length) return;
+        current = idx;
+        const m = MODULES[KEYS[idx]];
+
+        document.getElementById('mod-title').textContent = m.title;
+        document.getElementById('mod-duration').textContent = m.duration;
+        document.getElementById('mod-body').textContent = m.body;
+        document.getElementById('vid-label').textContent = m.title + ' — Click to play';
+
+        // Sidebar
+        document.querySelectorAll('.module-list li').forEach((li, i) => li.classList.toggle('active', i === idx));
+
+        // Prev/Next
+        document.getElementById('btn-prev').disabled = idx === 0;
+        const nextBtn = document.getElementById('btn-next');
+        if (idx === KEYS.length - 1) {
+            nextBtn.innerHTML = '<i class="ph ph-trophy"></i> Course Complete!';
+            nextBtn.disabled = true;
+        } else {
+            nextBtn.innerHTML = 'Next Module <i class="ph ph-arrow-right"></i>';
+            nextBtn.disabled = false;
+        }
+
+        // Progress
+        const pct = Math.round(((idx + 1) / KEYS.length) * 100);
+        document.getElementById('prog-fill').style.width = pct + '%';
+        document.getElementById('prog-text').textContent = (idx + 1) + ' of ' + KEYS.length + ' completed';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function nextMod() { if (current < KEYS.length - 1) loadModule(current + 1); }
+    function prevMod() { if (current > 0) loadModule(current - 1); }
+
+        // Early preview bypass
+    if (new URLSearchParams(window.location.search).get('preview') === 'drmarwabadr1984') {
         document.addEventListener('DOMContentLoaded', () => {
-            const hasAccess = localStorage.getItem('has_course_access');
-            if (!hasAccess) {
-                document.body.innerHTML = `
-                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif;">
-                        <i class="ph ph-warning-circle" style="font-size: 4rem; color: #ef4444; margin-bottom: 1rem;"></i>
-                        <h2 style="margin-bottom: 0.5rem;">Access Denied</h2>
-                        <p style="color: var(--muted); margin-bottom: 2rem;">You must purchase the course to view this page.</p>
-                        <a href="index.html" style="background: var(--primary); color: #fff; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 4px; font-weight: 500;">Return Home</a>
-                    </div>
-                `;
-                return;
-            }
-
-            const currentUser = JSON.parse(localStorage.getItem('site_current_user'));
-            const userName = currentUser ? currentUser.name : 'Student';
-            document.getElementById('user-welcome').textContent = 'Welcome, ' + userName;
-
-            // Theme toggle logic repeated for this page
-            const themeToggleBtn = document.getElementById('theme-toggle');
-            const htmlElement = document.documentElement;
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            htmlElement.setAttribute('data-theme', savedTheme);
-
-            themeToggleBtn.addEventListener('click', () => {
-                const currentTheme = htmlElement.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                htmlElement.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-            });
+            const loader = document.getElementById('access-loader');
+            const page = document.getElementById('page-content');
+            if (loader) loader.style.display = 'none';
+            if (page) page.style.display = 'flex';
+            loadModule(0);
         });
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        const saved = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', saved);
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        });
+                // Skip if preview mode already showed content
+        const pg = document.getElementById('page-content');
+        if (pg && pg.style.display === 'flex') return;
+        
+        const hasAccess = await window.PaymentService.guardCoursePage('act-course');
+        if (!hasAccess) return;
+        document.getElementById('access-loader').style.display = 'none';
+        document.getElementById('page-content').style.display = 'flex';
+        const user = JSON.parse(localStorage.getItem('site_current_user') || 'null');
+        const name = user?.user_metadata?.name || user?.email?.split('@')[0] || 'Student';
+        document.getElementById('user-welcome').textContent = 'Welcome, ' + name;
+        loadModule(0);
+    });
     </script>
 </body>
 </html>
-
