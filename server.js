@@ -51,6 +51,26 @@ app.post('/api/auth/signup', async (req, res) => {
     });
 
     if (error) return res.status(400).json({ error: error.message });
+
+    // ── Notify admin via Web3Forms ────────────────────────────
+    try {
+        const now = new Date().toLocaleString('en-GB', { timeZone: 'Asia/Kuwait' });
+        await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                access_key: '9d8affa7-79dd-41e4-a9d6-0587948e964f',
+                subject: '🆕 New User Registered — Dr. Marwa Platform',
+                from_name: 'Platform Notifications',
+                message: `New user registered:\n\nName: ${name || 'N/A'}\nEmail: ${email}\nTime: ${now} (Kuwait)`
+            })
+        });
+        console.log(`[Notify] New signup alert sent for: ${email}`);
+    } catch (notifyErr) {
+        console.warn('[Notify] Web3Forms notification failed:', notifyErr.message);
+    }
+    // ──────────────────────────────────────────────────────────
+
     res.status(201).json({ message: 'Account created successfully!', user: data.user, session: data.session });
 });
 
