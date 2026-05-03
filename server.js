@@ -423,12 +423,26 @@ app.post('/api/auth/forgot-password', async (req, res) => {
         redirectTo: 'https://drmarwabadr.drmarwa.workers.dev/reset-password.html'
     });
 
-    // Always respond with success — never reveal whether email exists (security)
     if (error && !error.message.includes('not found')) {
         return res.status(400).json({ error: error.message });
     }
 
     res.json({ message: 'If this email is registered, a password reset link has been sent.' });
+});
+
+// POST /api/auth/verify-otp — verifies the 6-digit code sent to user email on signup
+app.post('/api/auth/verify-otp', async (req, res) => {
+    const { email, token } = req.body;
+    if (!email || !token) return res.status(400).json({ error: 'Email and code are required' });
+
+    const { data, error } = await supabase.auth.verifyOtp({
+        email,
+        token,
+        type: 'signup'
+    });
+
+    if (error) return res.status(400).json({ error: error.message });
+    res.json({ session: data.session, user: data.user || data.session?.user });
 });
 
 // Fallback route to serve index.html for SPA-like behavior or if page not found
