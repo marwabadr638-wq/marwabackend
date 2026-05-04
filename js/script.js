@@ -190,42 +190,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const courseModal = document.getElementById('course-modal');
-    const subscribeBtns = document.querySelectorAll('.subscribe-btn');
     const proceedCheckoutBtn = document.getElementById('proceed-checkout-btn');
     
-    subscribeBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            // ── Enforce Login Before Purchase ──
-            if (!getSessionUser()) {
-                showToast('Please log in or create an account to purchase a course.', 'info');
-                if (authModal) authModal.classList.add('active');
-                return;
-            }
+    // Use event delegation for dynamically loaded course buttons
+    document.body.addEventListener('click', (e) => {
+        const btn = e.target.closest('.subscribe-btn');
+        if (!btn) return;
 
-            const courseCard = e.target.closest('.course-card');
-            if (courseCard && proceedCheckoutBtn) {
-                const h3 = courseCard.querySelector('h3');
-                let courseId = 'content';
-                if (h3) {
-                    const fullText = h3.innerHTML.replace(/<br>.*$/i, '').trim();
-                    courseId = fullText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-                }
-                // Try to get course_id from data attribute (set dynamically by fetchCourses)
-                const dataCourseId = courseCard.getAttribute('data-course-slug');
-                if (dataCourseId) courseId = dataCourseId;
+        // ── Enforce Login Before Purchase ──
+        if (!getSessionUser()) {
+            showToast('Please log in or create an account to purchase a course.', 'info');
+            if (authModal) authModal.classList.add('active');
+            return;
+        }
 
-                const price = courseCard.getAttribute('data-price') || '49';
-                proceedCheckoutBtn.href = `checkout.html?course=${courseId}&price=${price}`;
-                proceedCheckoutBtn.textContent = `Proceed to Checkout — $${price}`;
-                
-                if (window.AnalyticsSystem) {
-                    window.AnalyticsSystem.trackEvent(courseId === 'tri-therapy-bundle' ? 'bundle_view' : 'course_view', {
-                        course: courseId, price
-                    });
-                }
+        const courseCard = btn.closest('.course-card');
+        if (courseCard && proceedCheckoutBtn) {
+            const h3 = courseCard.querySelector('h3');
+            let courseId = 'content';
+            if (h3) {
+                const fullText = h3.innerHTML.replace(/<br>.*$/i, '').trim();
+                courseId = fullText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
             }
-            courseModal.classList.add('active');
-        });
+            // Try to get course_id from data attribute (set dynamically by fetchCourses)
+            const dataCourseId = courseCard.getAttribute('data-course-slug');
+            if (dataCourseId) courseId = dataCourseId;
+
+            const price = courseCard.getAttribute('data-price') || '49';
+            proceedCheckoutBtn.href = `checkout.html?course=${courseId}&price=${price}`;
+            proceedCheckoutBtn.textContent = `Proceed to Checkout — $${price}`;
+            
+            if (window.AnalyticsSystem) {
+                window.AnalyticsSystem.trackEvent(courseId === 'tri-therapy-bundle' ? 'bundle_view' : 'course_view', {
+                    course: courseId, price
+                });
+            }
+        }
+        courseModal.classList.add('active');
     });
 
     // ==========================================
