@@ -1,5 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
+    // Navbar Scroll Shadow
+    // ==========================================
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 10);
+        }, { passive: true });
+    }
+
+    // ==========================================
     // Sticky CTA Logic
     // ==========================================
     const stickyCta = document.getElementById('sticky-cta');
@@ -25,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
 
     // ==========================================
     // Quiz Logic
